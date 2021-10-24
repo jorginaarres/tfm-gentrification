@@ -1,0 +1,29 @@
+data_sources:
+  2018_Renda_disponible_llars:
+    format: csv
+    local: data/raw/2018_renda_disponible_llars.csv
+    url: https://opendata-ajuntament.barcelona.cat/data/dataset/78db0c75-fa56-4604-9510-8b92834a7fd2/resource/34ededd1-6271-4b9b-bac9-18a3fc264a48/download/2018_renda_disponible_llars.csv
+    columns:
+      - Any
+      - Codi_Districte
+      - Nom_Districte
+      - Codi_Barri
+      - Nom_Barri
+      - Import_€_Any
+    column_alias:
+      - anyo
+      - cod_dist
+      - nom_dist
+      - cod_barrio
+      - nom_barrio
+      - importe_eur_anyo
+    header: 0
+    sep: ","
+    schema_mode: explicit  # explicit or infer
+    schema:
+      anyo: int
+      cod_dist: int
+      nom_dist: str
+      cod_barrio: int
+      nom_barrio: str
+      importe_eur_anyo: int
