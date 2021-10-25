@@ -10,4 +10,5 @@ if __name__ == '__main__':
     )
     logger = logging.getLogger(__name__)
     config = load_yaml('config/config.yaml')
-    data = load_data(config['data_source'])
+    data_raw = load_data(config['data_source'], 'raw')
+

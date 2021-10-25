@@ -1,29 +1,258 @@
 data_sources:
-  2018_Renda_disponible_llars:
-    format: csv
-    local: data/raw/2018_renda_disponible_llars.csv
-    url: https://opendata-ajuntament.barcelona.cat/data/dataset/78db0c75-fa56-4604-9510-8b92834a7fd2/resource/34ededd1-6271-4b9b-bac9-18a3fc264a48/download/2018_renda_disponible_llars.csv
-    columns:
-      - Any
-      - Codi_Districte
-      - Nom_Districte
-      - Codi_Barri
-      - Nom_Barri
-      - Import_€_Any
-    column_alias:
-      - anyo
-      - cod_dist
-      - nom_dist
-      - cod_barrio
-      - nom_barrio
-      - importe_eur_anyo
-    header: 0
-    sep: ","
-    schema_mode: explicit  # explicit or infer
-    schema:
-      anyo: int
-      cod_dist: int
-      nom_dist: str
-      cod_barrio: int
-      nom_barrio: str
-      importe_eur_anyo: int
+  raw:
+    renta:
+      format: csv
+      local:
+        - data/raw/renda_disponible_llars/2018_renda_neta_mitjana_per_llar.csv
+        - data/raw/renda_disponible_llars/2017_renda_neta_mitjana_per_llar.csv
+        - data/raw/renda_disponible_llars/2016_renda_neta_mitjana_per_llar.csv
+        - data/raw/renda_disponible_llars/2015_renda_neta_mitjana_per_llar.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/9d30d9b1-bbbe-4431-84f1-bcbf001acc14/download/2018_renda_neta_mitjana_per_llar.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/47dabf0e-371d-4739-9206-c81a56666797/download/2017_renda_neta_mitjana_per_llar.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/37147963-5686-4746-8b13-9a1349906351/download/2016_renda_neta_mitjana_per_llar.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/94d5b7c5-b702-420f-957d-14ce10e3add5/download/2015_renda_neta_mitjana_per_llar.csv
+      select:
+        - Any
+        - Codi_Districte
+        - Nom_Districte
+        - Codi_Barri
+        - Nom_Barri
+        - Seccio_Censal
+        - Import_€_Any
+      column_alias:
+        - anyo
+        - cod_dist
+        - nom_dist
+        - cod_barrio
+        - nom_barrio
+        - seccion_censal
+        - importe_eur_anyo
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        cod_dist: int
+        nom_dist: str
+        cod_barrio: int
+        nom_barrio: str
+        importe_eur_anyo: int
+
+    espacios_musica_copas:
+      format: csv
+      local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
+      url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_espais-de-musica-i-copes.csv
+
+    bibliotecas_museos:
+      format: csv
+      local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
+      url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_biblioteques-i-museus.csv
+
+    cines_teatros_auditorios:
+      format: csv
+      local: data/raw/opendatabcn_cultura_cines-teatres-auditoris.csv
+      url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_cines-teatres-auditoris.csv
+
+    parques_jardines:
+      format: csv
+      local: data/raw/opendatabcn_cultura_parcs-i-jardins.csv
+      url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_parcs-i-jardins.csv
+
+    precio_alquiler:
+      format: csv
+      local:
+        - data/raw/precio_alquiler_mensual/2021_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2020_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2019_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2018_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2017_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2016_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2015_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2014_Lloguer_preu_trim.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/cfc45f2b-62eb-4621-8486-1b90e36b4bfe/download/2021_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/47c9d64d-317a-45d0-8c45-45488df8601c/download/2020_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/004c76b1-6269-4136-89b2-89fd47046930/download/2019_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/3dc45b16-42a9-4f57-9863-e6d1a4f5869f/download/2018_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/0a71a12d-55fa-4a76-b816-4ee55f84d327/download/2017_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/b45e8b56-1988-4474-bf61-0a76f8ab28c2/download/2016_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/fcdbfa43-d97a-4da3-b78b-6f255dbcf4cc/download/2015_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/5855ba6c-f554-4a99-837a-04ea69bc71f4/download/2014_lloguer_preu_trim.csv
+
+    precio_compra_venta:
+      format: csv
+      local:
+        - data/raw/precio_compra_venta/2020_comp_vend_preu_trim.csv
+        - data/raw/precio_compra_venta/2019_comp_vend_preu_trim.csv
+        - data/raw/precio_compra_venta/2018_comp_vend_preu.csv
+        - data/raw/precio_compra_venta/2017_comp_vend_preu.csv
+        - data/raw/precio_compra_venta/2016_comp_vend_preu.csv
+        - data/raw/precio_compra_venta/2015_comp_vend_preu.csv
+        - data/raw/precio_compra_venta/2014_comp_vend_preu.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/0a919484-b023-4579-bdc9-f7b7df90d9b5/download/2020_comp_vend_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/c9defbfa-0b58-49db-85ed-cf13f165a5d5/download/2019_comp_vend_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/c03c20d7-7247-4da9-88d2-c66577638589/download/2018_comp_vend_preu.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/54bacafe-e84e-4557-8c8a-b36c25025cb0/download/2017_comp_vend_preu.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/a4dbc087-03db-42ae-acac-daf267a92a87/download/2016_comp_vend_preu.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/9f0c0e38-26dd-4f5b-9662-0ea4e07e0563/download/2015_comp_vend_preu.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/2ad4d47f-2de0-4a06-9f12-77b070b9138c/download/2014_comp_vend_preu.csv
+
+    incidentes:
+      format: csv
+      local:
+        - data/raw/incidentes/2015_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2016_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2017_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2018_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2019_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2020_incidents_gestionats_gub.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/82d44d94-2e18-42e5-a0e2-2aedf7fa636b/download/2015_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/78c92b8c-ed9a-432c-aa68-90866b43cc37/download/2016_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/7cf94a66-b3d5-4c5d-8d44-5a806905b11c/download/2017_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/b72a5374-e5e5-4904-9d8b-a51551da1536/download/2018_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/00e17d4b-ff16-45aa-9089-ddb60a129bcf/download/2019_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/0da45262-e472-46ba-a44f-665b5b849693/download/2020_incidents_gestionats_gub.csv
+
+
+    musica_en_vivo:
+      format: csv
+      local:
+        - data/raw/musica_en_vivo/2015_dades_musica_en_viu.csv
+        - data/raw/musica_en_vivo/2016_dades_musica_en_viu.csv
+        - data/raw/musica_en_vivo/2017_dades_musica_en_viu.csv
+        - data/raw/musica_en_vivo/2018_dades_musica_en_viu.csv
+
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/82d44d94-2e18-42e5-a0e2-2aedf7fa636b/download/2015_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/78c92b8c-ed9a-432c-aa68-90866b43cc37/download/2016_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/7cf94a66-b3d5-4c5d-8d44-5a806905b11c/download/2017_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/b72a5374-e5e5-4904-9d8b-a51551da1536/download/2018_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/00e17d4b-ff16-45aa-9089-ddb60a129bcf/download/2019_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/0da45262-e472-46ba-a44f-665b5b849693/download/2020_incidents_gestionats_gub.csv
+
+    hoteles:
+      format: csv
+      local: data/raw/opendatabcn_allotjament_hotels.csv
+      url: http://www.bcn.cat/tercerlloc/files/allotjament/opendatabcn_allotjament_hotels-csv.csv
+
+    roba_amiga:
+      format: csv
+      local: data/raw/opendatabcn_medi-ambient_medi-ambient_punt-roba-amiga.csv
+      url: http://www.bcn.cat/tercerlloc/files/medi-ambient/medi-ambient/opendatabcn_medi-ambient_medi-ambient_punt-roba-amiga.csv
+
+    instalaciones_deportivas:
+      format: csv
+      local: data/raw/opendatabcn_esports_instalacions-esportives.csv
+      url: http://www.bcn.cat/tercerlloc/files/esports/opendatabcn_esports_instalacions-esportives.csv
+
+    equipamiento_cultura:
+      format: csv
+      local: data/raw/opendatabcn_llista-equipaments_cultura.csv
+      url: http://www.bcn.cat/tercerlloc/files/llista-equipaments/opendatabcn_llista-equipaments_cultura-csv.csv
+
+    restaurantes:
+      format: csv
+      local: data/raw/opendatabcn_restaurants_restaurants.csv
+      url: http://www.bcn.cat/tercerlloc/files/restaurants/opendatabcn_restaurants_restaurants-csv.csv
+
+    centros_comerciales:
+      format: csv
+      local: data/raw/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
+      url: http://www.bcn.cat/tercerlloc/files/mercats-centrescomercials/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
+
+    puntos_interes:
+      format: csv
+      local: data/raw/opendatabcn_pits.csv
+      url: http://www.bcn.cat/tercerlloc/files/opendatabcn_pits-csv.csv
+
+    lugares_culto:
+      format: csv
+      local: data/raw/opendatabcn_llocs-de-culte_llocs-de-culte.csv
+      url: http://www.bcn.cat/tercerlloc/files/llocs-de-culte/opendatabcn_llocs-de-culte_llocs-de-culte-csv.csv
+
+    hospitales:
+      format: csv
+      local: data/raw/opendatabcn_sanitat_hospitals-i-centres-atencio-primaria.csv
+      url: http://www.bcn.cat/tercerlloc/files/sanitat/opendatabcn_sanitat_hospitals-i-centres-atencio-primaria.csv
+
+
+    antiguedad_vehiculos:
+      format: csv
+      local:
+        - data/raw/antiguedad_vehiculos/2018_antiguitat_turismes.csv
+        - data/raw/antiguedad_vehiculos/2017_antiguitat_turismes.csv
+        - data/raw/antiguedad_vehiculos/2016_antiguitat_turismes.csv
+        - data/raw/antiguedad_vehiculos/2015_antiguitat_turismes.csv
+        - data/raw/antiguedad_vehiculos/2014_antiguitat_turismes.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/e0308051-6cec-4272-a6ee-9e56fecd5a44/download/2018_antiguitat_turismes.csv
+        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3634f3f5-4e3f-4c10-a427-b5a25b7c972c/download/2017_antiguitat_turismes.csv
+        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/098f20b7-5b0f-4150-ae1e-94161b515086/download/2016_antiguitat_turismes.csv
+        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3df08917-eaf1-4a75-b4db-cbf425de6f3c/download/2015_antiguitat_turismes.csv
+        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/036a29c0-38a3-4a8e-81c2-19a38f58d634/download/2014_antiguitat_turismes.csv
+
+    natalidad:
+      format: csv
+      local:
+        - data/raw/natalidad/2020_taxa_natalitat.csv
+        - data/raw/natalidad/2019_taxa_natalitat.csv
+        - data/raw/natalidad/2018_taxa_natalitat.csv
+        - data/raw/natalidad/2017_taxa_natalitat.csv
+        - data/raw/natalidad/2016_taxa_natalitat.csv
+        - data/raw/natalidad/2015_taxa_natalitat.csv
+        - data/raw/natalidad/2014_taxa_natalitat.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/24602560-17c9-49b7-84dd-dc191ed66c0e/download/2020_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/b0021523-09f4-423b-836a-d25e81089d17/download/2019_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/91b6b18c-8782-47c6-82f5-ea269f3a232c/download/2018_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/e776c441-f0b5-4bc2-a0ec-629dac9f9c71/download/2017_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/7ac70746-8621-4e09-aa80-3a643246bb54/download/2016_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/14c84125-f360-4641-9db3-6d8622400884/download/2015_taxa_natalitat.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/f012efb1-e55d-454f-b9b9-ad05664a4ea4/download/2014_taxa_natalitat.csv
+
+    inmigracion:
+      format: csv
+      local:
+        - data/raw/inmigracion/2020_taxa_immigracio.csv
+        - data/raw/inmigracion/2019_taxa_immigracio.csv
+        - data/raw/inmigracion/2018_taxa_immigracio.csv
+        - data/raw/inmigracion/2017_taxa_immigracio.csv
+        - data/raw/inmigracion/2016_taxa_immigracio.csv
+        - data/raw/inmigracion/2015_taxa_immigracio.csv
+        - data/raw/inmigracion/2014_taxa_immigracio.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/43539e03-0d1c-4355-b144-65b110918d8c/download/2020_taxa_immigracio.csv
+        - hhttps://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/04ceda77-ceb5-4ae7-ad64-20a4cb4f94f0/download/2019_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/bf82f3fc-5a9a-48fd-8e95-75ed1b5aa7ea/download/2018_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/d0fc6cac-a252-4cb1-9661-b1a9c38d05d5/download/2017_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/66be6027-bd54-4039-be15-9e5faa616ce2/download/2016_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/67594114-2dda-4b1d-8ad8-840a084775ef/download/2015_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/bcf83110-8492-4000-b1dc-8668c6abd1e8/download/2014_taxa_immigracio.csv
+
+    ocpacion_media_piso:
+      format: csv
+      local:
+        - data/raw/ocpacion_media_piso/2020_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2019_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2018_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2017_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2016_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2015_padro_ocupacio_mitjana.csv
+        - data/raw/ocpacion_media_piso/2014_padro_ocupacio_mitjana.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/5267fd1f-5fb6-41fe-821e-3790efa0a461/download/2020_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/35619477-6bb3-4211-b4a2-3b85013f1d66/download/2019_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/fb4f3e52-8997-4cc0-80be-bebbd850354d/download/2018_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/c27464bd-1c3c-4a00-b2f4-2968ad07236e/download/2017_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/09026d72-aed9-444d-b0bd-5f92c81ece07/download/2016_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/301c14bf-1097-4003-860b-da9ad027eb2b/download/2015_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/d1fc8bbd-38f2-478b-b470-246de9bfdeea/download/2014_padro_ocupacio_mitjana.csv
+
+
+
+
+
+
