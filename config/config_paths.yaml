@@ -19,7 +19,7 @@ data_sources:
         - Codi_Barri
         - Nom_Barri
         - Seccio_Censal
-        - Import_€_Any
+        - "Import_Euros "
       column_alias:
         - anyo
         - cod_dist
@@ -37,27 +37,132 @@ data_sources:
         nom_dist: str
         cod_barrio: int
         nom_barrio: str
+        seccion_censal: int
         importe_eur_anyo: int
 
     espacios_musica_copas:
       format: csv
       local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
       url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_espais-de-musica-i-copes.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - nom_barrio
+        - id_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      encoding: 'utf-16le'
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     bibliotecas_museos:
       format: csv
       local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
       url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_biblioteques-i-museus.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      encoding: 'utf-16le'
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     cines_teatros_auditorios:
       format: csv
       local: data/raw/opendatabcn_cultura_cines-teatres-auditoris.csv
       url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_cines-teatres-auditoris.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      encoding: 'UTF-16'
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     parques_jardines:
       format: csv
       local: data/raw/opendatabcn_cultura_parcs-i-jardins.csv
       url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_parcs-i-jardins.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      encoding: 'utf-16le'
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     precio_alquiler:
       format: csv
@@ -79,8 +184,32 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/b45e8b56-1988-4474-bf61-0a76f8ab28c2/download/2016_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/fcdbfa43-d97a-4da3-b78b-6f255dbcf4cc/download/2015_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/5855ba6c-f554-4a99-837a-04ea69bc71f4/download/2014_lloguer_preu_trim.csv
+      select:
+        - Any
+        - Trimestre
+        - Codi_Barri
+        - Nom_Barri
+        - Lloguer_mitja
+        - Preu
+      column_alias:
+        - anyo
+        - trimestre
+        - id_barrio
+        - nom_barrio
+        - tipo_valor
+        - precio_mes
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        trimestre: int
+        id_barrio: int
+        nom_barrio: str
+        tipo_valor: str
+        precio_mes: float
 
-    precio_compra_venta:
+    precio_compra_venta:  # hacer media de cada fichero (group by cod_barrio), ya que 2020 y 2019 estan por trimestre
       format: csv
       local:
         - data/raw/precio_compra_venta/2020_comp_vend_preu_trim.csv
@@ -98,6 +227,27 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/a4dbc087-03db-42ae-acac-daf267a92a87/download/2016_comp_vend_preu.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/9f0c0e38-26dd-4f5b-9662-0ea4e07e0563/download/2015_comp_vend_preu.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/2ad4d47f-2de0-4a06-9f12-77b070b9138c/download/2014_comp_vend_preu.csv
+      select:
+        - Any
+        - Codi_Barri
+        - Nom_Barri
+        - Preu_mitja_habitatge
+        - Valor
+      column_alias:
+        - anyo
+        - id_barrio
+        - nom_barrio
+        - tipo_valor
+        - precio_miles_euros
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        id_barrio: int
+        nom_barrio: str
+        tipo_valor: str
+        precio_miles_euros: float
 
     incidentes:
       format: csv
@@ -115,69 +265,304 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/b72a5374-e5e5-4904-9d8b-a51551da1536/download/2018_incidents_gestionats_gub.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/00e17d4b-ff16-45aa-9089-ddb60a129bcf/download/2019_incidents_gestionats_gub.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/0da45262-e472-46ba-a44f-665b5b849693/download/2020_incidents_gestionats_gub.csv
-
-
-    musica_en_vivo:
-      format: csv
-      local:
-        - data/raw/musica_en_vivo/2015_dades_musica_en_viu.csv
-        - data/raw/musica_en_vivo/2016_dades_musica_en_viu.csv
-        - data/raw/musica_en_vivo/2017_dades_musica_en_viu.csv
-        - data/raw/musica_en_vivo/2018_dades_musica_en_viu.csv
-
-      url:
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/82d44d94-2e18-42e5-a0e2-2aedf7fa636b/download/2015_incidents_gestionats_gub.csv
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/78c92b8c-ed9a-432c-aa68-90866b43cc37/download/2016_incidents_gestionats_gub.csv
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/7cf94a66-b3d5-4c5d-8d44-5a806905b11c/download/2017_incidents_gestionats_gub.csv
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/b72a5374-e5e5-4904-9d8b-a51551da1536/download/2018_incidents_gestionats_gub.csv
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/00e17d4b-ff16-45aa-9089-ddb60a129bcf/download/2019_incidents_gestionats_gub.csv
-        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/0da45262-e472-46ba-a44f-665b5b849693/download/2020_incidents_gestionats_gub.csv
+      select:
+        - NK_Any
+        - Mes_any
+        - Codi_Incident
+        - Descripcio_Incident
+        - Codi_Barri
+        - Nom_Barri
+        - Numero_incidents_GUB
+      column_alias:
+        - anyo
+        - mes
+        - cod_incidente
+        - nom_incidente
+        - id_barrio
+        - nom_barrio
+        - num_incidentes
+      header: 0
+      sep: ","
+      part_col_names_fix: [7, 9, 0, 1, 4, 5, 6]
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        mes: int
+        cod_incidente: int
+        nom_incidente: str
+        id_barrio: int
+        nom_barrio: str
+        num_incidentes: int
 
     hoteles:
       format: csv
       local: data/raw/opendatabcn_allotjament_hotels.csv
       url: http://www.bcn.cat/tercerlloc/files/allotjament/opendatabcn_allotjament_hotels-csv.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     roba_amiga:
       format: csv
       local: data/raw/opendatabcn_medi-ambient_medi-ambient_punt-roba-amiga.csv
       url: http://www.bcn.cat/tercerlloc/files/medi-ambient/medi-ambient/opendatabcn_medi-ambient_medi-ambient_punt-roba-amiga.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     instalaciones_deportivas:
       format: csv
       local: data/raw/opendatabcn_esports_instalacions-esportives.csv
       url: http://www.bcn.cat/tercerlloc/files/esports/opendatabcn_esports_instalacions-esportives.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     equipamiento_cultura:
       format: csv
       local: data/raw/opendatabcn_llista-equipaments_cultura.csv
       url: http://www.bcn.cat/tercerlloc/files/llista-equipaments/opendatabcn_llista-equipaments_cultura-csv.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     restaurantes:
       format: csv
       local: data/raw/opendatabcn_restaurants_restaurants.csv
       url: http://www.bcn.cat/tercerlloc/files/restaurants/opendatabcn_restaurants_restaurants-csv.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     centros_comerciales:
       format: csv
       local: data/raw/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
       url: http://www.bcn.cat/tercerlloc/files/mercats-centrescomercials/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     puntos_interes:
       format: csv
       local: data/raw/opendatabcn_pits.csv
       url: http://www.bcn.cat/tercerlloc/files/opendatabcn_pits-csv.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     lugares_culto:
       format: csv
       local: data/raw/opendatabcn_llocs-de-culte_llocs-de-culte.csv
       url: http://www.bcn.cat/tercerlloc/files/llocs-de-culte/opendatabcn_llocs-de-culte_llocs-de-culte-csv.csv
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     hospitales:
       format: csv
       local: data/raw/opendatabcn_sanitat_hospitals-i-centres-atencio-primaria.csv
       url: http://www.bcn.cat/tercerlloc/files/sanitat/opendatabcn_sanitat_hospitals-i-centres-atencio-primaria.csv
-
+      select:
+        - register_id
+        - created
+        - name
+        - addresses_neighborhood_id
+        - addresses_neighborhood_name
+        - secondary_filters_name
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      column_alias:
+        - id
+        - anyo
+        - nombre
+        - id_barrio
+        - nom_barrio
+        - tipo_local
+        - geo_epgs_25831_x
+        - geo_epgs_25831_y
+        - geo_epgs_4326_x
+        - geo_epgs_4326_y
+      header: 0
+      sep: ","
+      schema_mode: infer  # explicit or infer
 
     antiguedad_vehiculos:
       format: csv
@@ -193,6 +578,27 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/098f20b7-5b0f-4150-ae1e-94161b515086/download/2016_antiguitat_turismes.csv
         - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3df08917-eaf1-4a75-b4db-cbf425de6f3c/download/2015_antiguitat_turismes.csv
         - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/036a29c0-38a3-4a8e-81c2-19a38f58d634/download/2014_antiguitat_turismes.csv
+      select:
+        - Any
+        - Codi_Barri
+        - Nom_Barri
+        - Antiguitat
+        - Nombre_turismes
+      column_alias:
+        - anyo
+        - id_barrio
+        - nom_barrio
+        - antiguedad
+        - num_turismos
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        id_barrio: int
+        nom_barrio: str
+        antiguedad: str
+        num_turismos: int
 
     natalidad:
       format: csv
@@ -212,6 +618,24 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/7ac70746-8621-4e09-aa80-3a643246bb54/download/2016_taxa_natalitat.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/14c84125-f360-4641-9db3-6d8622400884/download/2015_taxa_natalitat.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/f012efb1-e55d-454f-b9b9-ad05664a4ea4/download/2014_taxa_natalitat.csv
+      select:
+        - Any
+        - Codi_Barri
+        - Nom_Barri
+        - Taxa_mil_hab
+      column_alias:
+        - anyo
+        - id_barrio
+        - nom_barrio
+        - tasa_natalidad_mil_habitantes
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        id_barrio: int
+        nom_barrio: str
+        tasa_natalidad_mil_habitantes: float
 
     inmigracion:
       format: csv
@@ -231,6 +655,24 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/66be6027-bd54-4039-be15-9e5faa616ce2/download/2016_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/67594114-2dda-4b1d-8ad8-840a084775ef/download/2015_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/bcf83110-8492-4000-b1dc-8668c6abd1e8/download/2014_taxa_immigracio.csv
+      select:
+        - Any
+        - Codi_Barri
+        - Nom_Barri
+        - Taxa_mil_hab
+      column_alias:
+        - anyo
+        - id_barrio
+        - nom_barrio
+        - tasa_mil_habitantes
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        id_barrio: int
+        nom_barrio: str
+        tasa_mil_habitantes: float
 
     ocpacion_media_piso:
       format: csv
@@ -250,9 +692,26 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/09026d72-aed9-444d-b0bd-5f92c81ece07/download/2016_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/301c14bf-1097-4003-860b-da9ad027eb2b/download/2015_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/d1fc8bbd-38f2-478b-b470-246de9bfdeea/download/2014_padro_ocupacio_mitjana.csv
-
-
-
-
-
-
+      select:
+        - Any
+        - Codi_Barri
+        - Poblacio
+        - Domicilis
+        - Ocupacio_mitjana_persones_per_domicili
+      column_alias:
+        - anyo
+        - id_barrio
+        - nom_barrio
+        - poblacion
+        - num_domicilios
+        - num_personas_por_domicilio
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        id_barrio: int
+        nom_barrio: str
+        poblacion: int
+        num_domicilios: int
+        num_personas_por_domicilio: float
