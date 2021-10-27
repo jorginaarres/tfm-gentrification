@@ -20,6 +20,7 @@ def load_data(origin, layer='raw'):
         encoding = src_params.get('encoding', 'utf-8')
 
         if src_params['format'] == 'csv':
+            # ################# multiple parts #################
             if type(src_params[origin]) == list:
                 parts = []
                 num_parts = len(src_params[origin])
@@ -35,13 +36,21 @@ def load_data(origin, layer='raw'):
                         df = df[src_params['select']]
                     except KeyError as e:
                         logger.warning(f'Could not select columns from '
-                                       f'{df.columns}. Trying to fix it...')
-                        df = df.iloc[:, src_params['part_col_names_fix']]
+                                       f'{part_path} Trying to fix it...')
+                        col_indexes = src_params['part_col_names_fix']
+                        ordered_cols = [df.columns[i] for i in col_indexes]
+                        df = df.iloc[:, col_indexes]
+                        df = df[ordered_cols]
+
+                    if 'column_alias' in src_params:
+                        df.columns = src_params['column_alias']
                     parts.append(df)
 
-                logger.info('Unioning parts...')
+                logger.info(f'Unioning {len(parts)} parts...')
                 data[src] = pd.concat(parts)
+                logger.info('All parts united.')
 
+            # ################# only 1 file #################
             else:
                 data[src] = pd.read_csv(
                     src_params[origin],
@@ -50,12 +59,13 @@ def load_data(origin, layer='raw'):
                     encoding=encoding
                 )
                 data[src] = data[src][src_params['select']]
+                if 'column_alias' in src_params:
+                    data[src].columns = src_params['column_alias']
 
-            if 'column_alias' in src_params:
-                data[src].columns = src_params['column_alias']
+            # change schema if requested
             if src_params['schema_mode'] == 'explicit':
                 schema = src_params['schema']
-                data[src] = data[src].astype(schema)
+                data[src] = data[src].astype(schema, errors='ignore')
 
             logger.info(f'{src}\n{data[src].head(3)}')
 

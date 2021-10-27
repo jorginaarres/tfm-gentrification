@@ -283,7 +283,7 @@ data_sources:
         - num_incidentes
       header: 0
       sep: ","
-      part_col_names_fix: [7, 9, 0, 1, 4, 5, 6]
+      part_col_names_fix: [6, 7, 0, 1, 4, 5, 9]
       schema_mode: explicit  # explicit or infer
       schema:
         anyo: int
@@ -321,6 +321,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -351,6 +352,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -381,6 +383,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -411,6 +414,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -441,6 +445,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -471,6 +476,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -501,6 +507,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -531,6 +538,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -561,6 +569,7 @@ data_sources:
         - geo_epgs_4326_x
         - geo_epgs_4326_y
       header: 0
+      encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
 
@@ -622,12 +631,13 @@ data_sources:
         - Any
         - Codi_Barri
         - Nom_Barri
-        - Taxa_mil_hab
+        - Nombre
       column_alias:
         - anyo
         - id_barrio
         - nom_barrio
         - tasa_natalidad_mil_habitantes
+      part_col_names_fix: [0, 3, 4, 5]
       header: 0
       sep: ","
       schema_mode: explicit  # explicit or infer
@@ -665,6 +675,7 @@ data_sources:
         - id_barrio
         - nom_barrio
         - tasa_mil_habitantes
+      part_col_names_fix: [0, 3, 4, 5]
       header: 0
       sep: ","
       schema_mode: explicit  # explicit or infer
@@ -677,13 +688,13 @@ data_sources:
     ocpacion_media_piso:
       format: csv
       local:
-        - data/raw/ocpacion_media_piso/2020_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2019_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2018_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2017_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2016_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2015_padro_ocupacio_mitjana.csv
-        - data/raw/ocpacion_media_piso/2014_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2020_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2019_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2018_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2017_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2016_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2015_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2014_padro_ocupacio_mitjana.csv
       url:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/5267fd1f-5fb6-41fe-821e-3790efa0a461/download/2020_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/35619477-6bb3-4211-b4a2-3b85013f1d66/download/2019_padro_ocupacio_mitjana.csv
@@ -705,6 +716,7 @@ data_sources:
         - poblacion
         - num_domicilios
         - num_personas_por_domicilio
+      part_col_names_fix: [0, 3, 4, 5, 6, 7]
       header: 0
       sep: ","
       schema_mode: explicit  # explicit or infer
