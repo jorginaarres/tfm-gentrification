@@ -1,5 +1,6 @@
 from utils.utils import load_yaml
-from load_data.load import load_data
+from etl.extract import load_data
+from etl.transform import transform, save_to_csv_l1
 import logging
 
 
@@ -10,5 +11,16 @@ if __name__ == '__main__':
     )
     logger = logging.getLogger(__name__)
     config = load_yaml('config/config.yaml')
-    data_raw = load_data(config['data_source'], 'raw')
+
+    # 1. Load data from sources
+    if 'raw' in config['steps']:
+        data_raw = load_data(config['data_source'], 'raw')
+
+        # 2. get basic info for each dataframe (nulls, size, etc.),
+        # clean (remove blank spaces, NA's, weird values...) and transform
+        # (filters, aggregates, etc.)
+        data_l1 = transform(data_raw, config)
+        save_to_csv_l1(data_l1, config['l1_save_path'])
+
+
 

@@ -1,1 +1,12 @@
 data_source: local
+steps: [raw, info]
+min_year: 2014
+l1_save_path: data/L1/
+common_datasets_transformations:
+  - espacios_musica_copas
+  - bibliotecas_museos
+  - cines_teatros_auditorios
+  - parques_jardines
+  - hoteles
+  - roba_amiga
+  - instalaciones_deportivas

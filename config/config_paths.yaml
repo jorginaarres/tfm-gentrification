@@ -47,6 +47,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -57,10 +58,11 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
-        - nom_barrio
         - id_barrio
+        - nom_barrio
         - tipo_local
         - geo_epgs_25831_x
         - geo_epgs_25831_y
@@ -73,11 +75,12 @@ data_sources:
 
     bibliotecas_museos:
       format: csv
-      local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
+      local: data/raw/opendatabcn_cultura_biblioteques-i-museus.csv
       url: http://www.bcn.cat/tercerlloc/files/cultura/opendatabcn_cultura_biblioteques-i-museus.csv
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -88,7 +91,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -109,6 +113,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -119,7 +124,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -140,6 +146,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -150,7 +157,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -301,6 +309,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -311,7 +320,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -332,6 +342,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -342,7 +353,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -363,6 +375,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -373,7 +386,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -394,6 +408,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -404,7 +419,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -425,6 +441,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -435,7 +452,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -456,6 +474,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -466,7 +485,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -487,6 +507,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -497,7 +518,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -518,6 +540,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -528,7 +551,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -549,6 +573,7 @@ data_sources:
       select:
         - register_id
         - created
+        - modified
         - name
         - addresses_neighborhood_id
         - addresses_neighborhood_name
@@ -559,7 +584,8 @@ data_sources:
         - geo_epgs_4326_y
       column_alias:
         - id
-        - anyo
+        - created
+        - modified
         - nombre
         - id_barrio
         - nom_barrio
@@ -659,7 +685,7 @@ data_sources:
         - data/raw/inmigracion/2014_taxa_immigracio.csv
       url:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/43539e03-0d1c-4355-b144-65b110918d8c/download/2020_taxa_immigracio.csv
-        - hhttps://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/04ceda77-ceb5-4ae7-ad64-20a4cb4f94f0/download/2019_taxa_immigracio.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/04ceda77-ceb5-4ae7-ad64-20a4cb4f94f0/download/2019_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/bf82f3fc-5a9a-48fd-8e95-75ed1b5aa7ea/download/2018_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/d0fc6cac-a252-4cb1-9661-b1a9c38d05d5/download/2017_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/66be6027-bd54-4039-be15-9e5faa616ce2/download/2016_taxa_immigracio.csv
