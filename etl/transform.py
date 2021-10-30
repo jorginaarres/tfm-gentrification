@@ -14,6 +14,8 @@ def transform(sources: dict, config: dict) -> dict:
         # get function name to execute
         if df_name in config['common_datasets_transformations']:
             process_function_name = 'process_generic_dataset'
+        elif df_name in config['skip_processing_raw']:
+            process_function_name = 'skip_processing'
         else:
             process_function_name = f'process_{df_name}'
 
@@ -24,6 +26,7 @@ def transform(sources: dict, config: dict) -> dict:
             logger.warning(f'Function {process_function_name} not implemented')
         else:
             logger.info(f'Calling {process_function_name} for {df_name}')
+            config['current_df'] = df_name
             df_l1 = func(df, config)
 
             if type(df_l1) == pd.DataFrame:

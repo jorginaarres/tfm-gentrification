@@ -10,3 +10,13 @@ common_datasets_transformations:
   - hoteles
   - roba_amiga
   - instalaciones_deportivas
+  - hospitales
+  - lugares_culto
+  - restaurantes
+  - centros_comerciales
+common_keep_local_type_column:
+  - lugares_culto
+skip_processing_raw:
+  - ocupacion_media_piso
+  - inmigracion
+  - natalidad

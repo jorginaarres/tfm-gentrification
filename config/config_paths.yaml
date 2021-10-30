@@ -24,7 +24,7 @@ data_sources:
         - anyo
         - cod_dist
         - nom_dist
-        - cod_barrio
+        - id_barrio
         - nom_barrio
         - seccion_censal
         - importe_eur_anyo
@@ -35,7 +35,7 @@ data_sources:
         anyo: int
         cod_dist: int
         nom_dist: str
-        cod_barrio: int
+        id_barrio: int
         nom_barrio: str
         seccion_censal: int
         importe_eur_anyo: int
@@ -217,7 +217,7 @@ data_sources:
         tipo_valor: str
         precio_mes: float
 
-    precio_compra_venta:  # hacer media de cada fichero (group by cod_barrio), ya que 2020 y 2019 estan por trimestre
+    precio_compra_venta:  # hacer media de cada fichero (group by id_barrio), ya que 2020 y 2019 estan por trimestre
       format: csv
       local:
         - data/raw/precio_compra_venta/2020_comp_vend_preu_trim.csv
@@ -401,39 +401,6 @@ data_sources:
       sep: ","
       schema_mode: infer  # explicit or infer
 
-    equipamiento_cultura:
-      format: csv
-      local: data/raw/opendatabcn_llista-equipaments_cultura.csv
-      url: http://www.bcn.cat/tercerlloc/files/llista-equipaments/opendatabcn_llista-equipaments_cultura-csv.csv
-      select:
-        - register_id
-        - created
-        - modified
-        - name
-        - addresses_neighborhood_id
-        - addresses_neighborhood_name
-        - secondary_filters_name
-        - geo_epgs_25831_x
-        - geo_epgs_25831_y
-        - geo_epgs_4326_x
-        - geo_epgs_4326_y
-      column_alias:
-        - id
-        - created
-        - modified
-        - nombre
-        - id_barrio
-        - nom_barrio
-        - tipo_local
-        - geo_epgs_25831_x
-        - geo_epgs_25831_y
-        - geo_epgs_4326_x
-        - geo_epgs_4326_y
-      header: 0
-      encoding: 'utf-16le'
-      sep: ","
-      schema_mode: infer  # explicit or infer
-
     restaurantes:
       format: csv
       local: data/raw/opendatabcn_restaurants_restaurants.csv
@@ -466,44 +433,13 @@ data_sources:
       encoding: 'utf-16le'
       sep: ","
       schema_mode: infer  # explicit or infer
+      filters:
+        tipo_local: [Restaurants]
 
     centros_comerciales:
       format: csv
       local: data/raw/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
       url: http://www.bcn.cat/tercerlloc/files/mercats-centrescomercials/opendatabcn_mercats-centrescomercials_grans-centres-comercials.csv
-      select:
-        - register_id
-        - created
-        - modified
-        - name
-        - addresses_neighborhood_id
-        - addresses_neighborhood_name
-        - secondary_filters_name
-        - geo_epgs_25831_x
-        - geo_epgs_25831_y
-        - geo_epgs_4326_x
-        - geo_epgs_4326_y
-      column_alias:
-        - id
-        - created
-        - modified
-        - nombre
-        - id_barrio
-        - nom_barrio
-        - tipo_local
-        - geo_epgs_25831_x
-        - geo_epgs_25831_y
-        - geo_epgs_4326_x
-        - geo_epgs_4326_y
-      header: 0
-      encoding: 'utf-16le'
-      sep: ","
-      schema_mode: infer  # explicit or infer
-
-    puntos_interes:
-      format: csv
-      local: data/raw/opendatabcn_pits.csv
-      url: http://www.bcn.cat/tercerlloc/files/opendatabcn_pits-csv.csv
       select:
         - register_id
         - created
@@ -695,7 +631,7 @@ data_sources:
         - Any
         - Codi_Barri
         - Nom_Barri
-        - Taxa_mil_hab
+        - Nombre
       column_alias:
         - anyo
         - id_barrio
@@ -711,7 +647,7 @@ data_sources:
         nom_barrio: str
         tasa_mil_habitantes: float
 
-    ocpacion_media_piso:
+    ocupacion_media_piso:
       format: csv
       local:
         - data/raw/ocupacion_media_piso/2020_padro_ocupacio_mitjana.csv

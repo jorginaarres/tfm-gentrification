@@ -33,7 +33,8 @@ def load_data(origin, layer='raw'):
                         encoding=encoding
                     )
                     try:
-                        df = df[src_params['select']]
+                        df.columns = [c.lower() for c in df.columns]
+                        df = df[[c.lower() for c in src_params['select']]]
                     except KeyError as e:
                         logger.warning(f'Could not select columns from '
                                        f'{part_path} Trying to fix it...')
@@ -67,6 +68,9 @@ def load_data(origin, layer='raw'):
                 schema = src_params['schema']
                 data[src] = data[src].astype(schema, errors='ignore')
 
+            filters = src_params.get('filters', {})
+            for filt, filter_values in filters.items():
+                data[src] = data[src][data[src][filt].isin(filter_values)]
             logger.info(f'{src}\n{data[src].head(3)}')
 
     return data
