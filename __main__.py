@@ -1,6 +1,6 @@
 from utils.utils import load_yaml
 from etl.extract import load_data
-from etl.transform import transform, save_to_csv_l1
+from etl.transform import transform, save_to_csv_l1, clean_data
 import logging
 
 
@@ -20,9 +20,9 @@ if __name__ == '__main__':
         # columns. Discretize some column values.
         data_l1 = transform(data_raw, config)
         # 1.3 Clean data: Trim strings and detect format issues..
-        pass
+        data_l1_clean = clean_data(data_l1)
         # 1.4 Print dataset info: size, columns, summary, NAs
-        save_to_csv_l1(data_l1, config['l1_save_path'])
+        save_to_csv_l1(data_l1_clean, config['l1_save_path'])
 
 
 

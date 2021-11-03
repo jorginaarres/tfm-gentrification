@@ -11,14 +11,6 @@ def load_yaml(path):
         return config
 
 
-def replace_values_with_null(df: pd.DataFrame, values_to_replace: list):
-    pass
-
-
-def clean_strings(df: pd.DataFrame):
-    pass
-
-
 def count_nulls(df_name: str, df: pd.DataFrame):
     counts = df.isna().sum()
-    logger.info(f"NA's in {df_name}:\n{counts}")
+    logger.info(f"NA's in {df_name}:\n{counts}\n\n")

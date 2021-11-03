@@ -13,7 +13,7 @@ def years_array_from_created_modified_ts(created: str, modified: str,
     created_year = datetime.fromisoformat(created).year
     modified_year = datetime.fromisoformat(modified).year
     years = list(range(created_year, modified_year))
-    years = [year for year in years if year >= min_year]
+    years = [int(year) for year in years if year >= min_year]
     return years
 
 
@@ -21,6 +21,7 @@ def explode_years(df: pd.DataFrame, min_year: int) -> pd.DataFrame:
     df['anyo'] = df.apply(lambda row: years_array_from_created_modified_ts(
         row['created'], row['modified'], min_year), axis=1)
     df = df.explode('anyo')
+    df['anyo'] = df['anyo'].astype(str).astype(int, errors='ignore')
     df = df.drop(columns=['created', 'modified'])
     return df
 
@@ -30,7 +31,7 @@ def process_renta(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
     # by year and neighborhood
     group = ['anyo', 'id_barrio', 'nom_barrio']
     df = df.groupby(group).agg(importe_eur_anyo=('importe_eur_anyo', 'mean'))
-    df = df.reset_index(drop=True)
+    df = df.reset_index()
     return df
 
 
