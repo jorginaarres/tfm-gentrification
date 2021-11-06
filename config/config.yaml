@@ -1,7 +1,8 @@
 data_source: local
-steps: [raw, info]
+steps: [l2]
 min_year: 2014
 l1_save_path: data/L1/
+l2_save_path: data/L2/
 common_datasets_transformations:
   - espacios_musica_copas
   - bibliotecas_museos
@@ -14,8 +15,6 @@ common_datasets_transformations:
   - lugares_culto
   - restaurantes
   - centros_comerciales
-common_keep_local_type_column:
-  - lugares_culto
 skip_processing_raw:
   - ocupacion_media_piso
   - inmigracion

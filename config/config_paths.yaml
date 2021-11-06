@@ -246,7 +246,7 @@ data_sources:
         - id_barrio
         - nom_barrio
         - tipo_valor
-        - precio_miles_euros
+        - euros
       header: 0
       sep: ","
       schema_mode: explicit  # explicit or infer
@@ -255,7 +255,7 @@ data_sources:
         id_barrio: int
         nom_barrio: str
         tipo_valor: str
-        precio_miles_euros: float
+        euros: float
 
     incidentes:
       format: csv
@@ -689,3 +689,33 @@ data_sources:
         poblacion: int
         num_domicilios: int
         num_personas_por_domicilio: float
+
+  l1:
+    lugares:
+      bibliotecas_museos: data/L1/bibliotecas_museos.csv
+      centros_comerciales: data/L1/centros_comerciales.csv
+      cines_teatros_auditorios: data/L1/cines_teatros_auditorios.csv
+      espacios_musica_copas: data/L1/espacios_musica_copas.csv
+      hospitales: data/L1/hospitales.csv
+      hoteles: data/L1/hoteles.csv
+      instalaciones_deportivas: data/L1/instalaciones_deportivas.csv
+      lugares_culto: data/L1/lugares_culto.csv
+      parques_jardines: data/L1/parques_jardines.csv
+      restaurantes: data/L1/restaurantes.csv
+      roba_amiga: data/L1/roba_amiga.csv
+    antiguedad_vehiculos:
+      antiguedad_vehiculos: data/L1/antiguedad_vehiculos.csv
+    incidentes:
+      incidentes: data/L1/incidentes.csv
+    inmigracion:
+      inmigracion: data/L1/inmigracion.csv
+    natalidad:
+      natalidad: data/L1/natalidad.csv
+    ocupacion_media_piso:
+      ocupacion_media_piso: data/L1/ocupacion_media_piso.csv
+    precio_alquiler:
+      precio_alquiler: data/L1/precio_alquiler.csv
+    precio_compra_venta:
+      precio_compra_venta: data/L1/precio_compra_venta.csv
+    renta:
+      renta: data/L1/renta.csv

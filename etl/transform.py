@@ -1,15 +1,15 @@
 import numpy as np
 import pandas as pd
 import logging
-from pathlib import Path
 from utils.utils import count_nulls
-import etl.processing as processing
+import etl.processing_raw as processing_raw
+import etl.processing_l1 as processing_l1
 from io import StringIO
 
 logger = logging.getLogger(__name__)
 
 
-def transform(sources: dict, config: dict) -> dict:
+def transform_raw(sources: dict, config: dict) -> dict:
     src_l1 = {}
     logger.info('********** Getting information from dataframes **********')
     for df_name, df in sources.items():
@@ -23,7 +23,7 @@ def transform(sources: dict, config: dict) -> dict:
 
         # execute function
         try:
-            func = getattr(processing, process_function_name)
+            func = getattr(processing_raw, process_function_name)
         except Exception:
             logger.warning(f'Function {process_function_name} not implemented')
         else:
@@ -36,6 +36,24 @@ def transform(sources: dict, config: dict) -> dict:
             elif type(df_l1) == dict:
                 src_l1 = {**src_l1, **df_l1}
     return src_l1
+
+
+def transform_l1(sources: dict, config: dict) -> dict:
+    src_l2 = {}
+    for df_name, dfs in sources.items():
+        process_function_name = f'process_{df_name}'
+        # execute function
+        try:
+            func = getattr(processing_l1, process_function_name)
+        except Exception:
+            logger.warning(f'Function {process_function_name} not '
+                           f'implemented. Returning df without transforming')
+            src_l2[df_name] = dfs[df_name]
+
+        else:
+            logger.info(f'Calling {process_function_name} for {df_name}')
+            src_l2[df_name] = func(dfs)
+    return src_l2
 
 
 def clean_data(sources: dict):
@@ -55,10 +73,4 @@ def clean_data(sources: dict):
 
     return sources
 
-
-def save_to_csv_l1(dfs: dict, path: str):
-    Path(path).mkdir(parents=True, exist_ok=True)
-    for df_name, df in dfs.items():
-        dataset_path = f'{path}{df_name}.csv'
-        df.to_csv(dataset_path, index=False)
 

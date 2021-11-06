@@ -61,10 +61,10 @@ def process_precio_compra_venta(df: pd.DataFrame, config: dict = None
                                 ) -> pd.DataFrame:
     # filter only by "tipo_valor" == Total. Milers d'euros and group by year
     # and neighorhood to avoid dataset parts that are divided by term
-    df = df[df['tipo_valor'] == "Total. Milers d'euros"]
+    df = df[df['tipo_valor'] == "Total. Euros/m2 construït"]
     group = ['anyo', 'id_barrio', 'nom_barrio']
-    df = df.groupby(group).agg(precio_miles_euros=('precio_miles_euros',
-                                                   'mean')).reset_index()
+    df = df.groupby(group).agg(precio_compra_venta_m2=('euros',
+                                                       'mean')).reset_index()
     return df
 
 
@@ -114,11 +114,7 @@ def process_generic_dataset(df: pd.DataFrame,
     # local in one year)
     df = explode_years(df, config['min_year'])
     df = df.drop_duplicates(subset=['anyo', 'id'], keep='first')
-
-    if config['current_df'] in config['common_keep_local_type_column']:
-        df = df.drop(columns=['id'])
-    else:
-        df = df.drop(columns=['id', 'tipo_local'])
+    df = df.drop(columns=['id'])
     df = df.reset_index(drop=True)
     return df
 
