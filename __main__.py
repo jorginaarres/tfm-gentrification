@@ -1,7 +1,8 @@
 from utils.utils import load_yaml
 from etl.extract import load_data
 from utils.utils import save_dfs_to_csv
-from etl.transform import transform_raw, transform_l1, clean_data
+from etl.transform import (transform_raw, transform_l1, clean_data,
+                           transform_dataset)
 import logging
 
 
@@ -28,10 +29,14 @@ if __name__ == '__main__':
     # 2. Dataset of all places + others with KPIs
     if 'l2' in config['steps']:
         data_l1 = load_data(layer='l1')
-        data_l2 = transform_l1(data_l1, config)
+        data_l2 = transform_l1(data_l1)
         save_dfs_to_csv(data_l2, config['l2_save_path'])
 
     # 3. Generate a dataset with a row for each neighborhood - year:
+    if 'l3' in config['steps']:
+        data_l2 = load_data(layer='l2')
+        dataset = transform_dataset(data_l2)
+        save_dfs_to_csv({'dataset': dataset}, config['dataset'])
     # aggregate number of places of each type and add KPIs
 
 

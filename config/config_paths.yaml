@@ -1,5 +1,26 @@
 data_sources:
   raw:
+    superficie:
+      format: csv
+      local: data/raw/2019_superficie.csv
+      url: https://opendata-ajuntament.barcelona.cat/data/dataset/8f144d2c-1185-4e5c-9b97-ac930eeffca8/resource/9cd3d989-03c2-4e39-b3a7-eec0eac53e9f/download/2019_superficie.csv
+      select:
+        - Codi_Barri
+        - Nom_Barri
+        - Superfície (ha)
+      column_alias:
+        - id_barrio
+        - nom_barrio
+        - superficie_ha
+      header: 0
+      encoding: 'utf-8'
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        id_barrio: int
+        nom_barrio: str
+        superficie_ha: float
+
     renta:
       format: csv
       local:
@@ -719,3 +740,18 @@ data_sources:
       precio_compra_venta: data/L1/precio_compra_venta.csv
     renta:
       renta: data/L1/renta.csv
+    superficie:
+      superficie: data/L1/superficie.csv
+
+  l2:
+    dataset:
+      lugares: data/L2/lugares.csv
+      antiguedad_vehiculos: data/L2/antiguedad_vehiculos.csv
+      incidentes: data/L2/incidentes.csv
+      inmigracion: data/L2/inmigracion.csv
+      natalidad: data/L2/natalidad.csv
+      ocupacion_media_piso: data/L2/ocupacion_media_piso.csv
+      precio_alquiler: data/L2/precio_alquiler.csv
+      precio_compra_venta: data/L2/precio_compra_venta.csv
+      renta: data/L2/renta.csv
+      superficie: data/L2/superficie.csv

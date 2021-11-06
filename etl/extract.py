@@ -74,7 +74,7 @@ def load_data(origin='local', layer='raw'):
                     data[src] = data[src][data[src][filt].isin(filter_values)]
                 logger.info(f'{src}\n{data[src].head(3)}')
 
-        elif layer == 'l1':
+        elif layer != 'raw':
             data[src] = {}
             for dep, dep_path in src_params.items():
                 data[src][dep] = pd.read_csv(dep_path, header=0)

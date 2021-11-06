@@ -1,11 +1,49 @@
 import pandas as pd
-import logging
-from datetime import datetime
-import numpy as np
 
 
 def process_lugares(dfs: dict) -> pd.DataFrame:
     df = pd.concat(dfs.values())
+    categories = {
+        'ocio': [
+            'Bars i pubs musicals', 'Salons de ball', 'Discoteques',
+            'Tablaos flamencs', 'Karaokes', 'Sales de festes', 'Zoo',
+            'Tibidabo', 'Bars i pubs musicals'
+        ],
+        'gastronomia': ['Cocteleries', 'Restaurants'],
+        'cultura': [
+            'Museus', 'Biblioteques', "Sales d'estudi", 'Teatres', 'Cinemes',
+            'Biblioteques municipals', 'Auditoris'
+        ],
+        'sanidad': [
+            'Hospitals i clíniques', 'CAPs', 'Centres urgències (CUAPs)'
+        ],
+        'hoteles': [
+            'Hotels 4 estr.', 'Hotels 3 estr.', 'Hotels 5 estr.',
+            'Hotels 2 estr.', 'Hotels 1 estr.'
+        ],
+        'deporte': [
+            'Altres esports', 'Bàsquet', 'Tennis', 'Badminton', 'Futbol sala',
+            'Frontennis', 'Futbol'
+        ],
+        'lugares_culto': [
+            "Capelles de l'Església de Jesucrist dels S.D.D.", 'Mesquites',
+            'Esglésies catòliques', 'Esglésies evangèliques', 'Sinagogues',
+            'Centres budistes', 'Salons del regne', 'Centres taoistes',
+            'Esglésies adventistes', "Centres Baha'is", 'Comunitats ortodoxes',
+            'Temples sikhs', 'Centres hindús'
+        ],
+        'parques_jardines': ['Parcs i jardins'],
+        'roba_amiga': ['Punts de roba amiga'],
+        'centros_comerciales': ['Grans centres comercials']
+    }
+
+    df['categoria_lugar'] = df['tipo_local']
+    for category, mappings in categories.items():
+        df['categoria_lugar'].replace(mappings, category, inplace=True)
+
+    df = df[~df['categoria_lugar'].isin(['Arxius municipals', 'Altres',
+                                         "Interiors d'illa"])]
+    df = df[df['anyo'].notnull()]
     df['anyo'] = df['anyo'].astype(int, errors='ignore')
     return df
 

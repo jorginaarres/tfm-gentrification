@@ -1,8 +1,9 @@
 data_source: local
-steps: [l2]
+steps: [l3]
 min_year: 2014
 l1_save_path: data/L1/
 l2_save_path: data/L2/
+dataset: data/dataset/
 common_datasets_transformations:
   - espacios_musica_copas
   - bibliotecas_museos
@@ -19,3 +20,4 @@ skip_processing_raw:
   - ocupacion_media_piso
   - inmigracion
   - natalidad
+  - superficie

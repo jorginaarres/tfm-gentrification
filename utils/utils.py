@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def load_yaml(path):
-    with open(path) as file:
+    with open(path, encoding='utf8') as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
         return config
 

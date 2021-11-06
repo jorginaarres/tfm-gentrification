@@ -38,7 +38,7 @@ def transform_raw(sources: dict, config: dict) -> dict:
     return src_l1
 
 
-def transform_l1(sources: dict, config: dict) -> dict:
+def transform_l1(sources: dict) -> dict:
     src_l2 = {}
     for df_name, dfs in sources.items():
         process_function_name = f'process_{df_name}'
@@ -54,6 +54,34 @@ def transform_l1(sources: dict, config: dict) -> dict:
             logger.info(f'Calling {process_function_name} for {df_name}')
             src_l2[df_name] = func(dfs)
     return src_l2
+
+
+def transform_dataset(sources: dict) -> pd.DataFrame:
+    dfs = sources['dataset']
+    merge_on = ['anyo', 'id_barrio', 'nom_barrio']
+    kpis = pd.merge(dfs['antiguedad_vehiculos'], dfs['incidentes'],
+                    on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['inmigracion'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['natalidad'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['ocupacion_media_piso'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['precio_alquiler'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['precio_compra_venta'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['renta'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['superficie'], on=['id_barrio', 'nom_barrio'],
+                    how='left')
+    kpis = kpis[kpis['nom_barrio'] != 'No consta']
+
+    lugares = dfs['lugares']
+    group = ['id_barrio', 'nom_barrio', 'anyo', 'categoria_lugar']
+    lugares = lugares.rename(columns={'num_locales': 'num_ubicaciones_'})
+    lugares = lugares.groupby(group).size().reset_index(name='num_ubic_')
+    lugares['num_ubic_'] = lugares['num_ubic_'].astype(int)
+    lugares = lugares.set_index(group).unstack().reset_index()
+    col_names = [c[0] + c[1] for c in lugares.columns]
+    lugares.columns = col_names
+
+    dataset = pd.merge(kpis, lugares, on=['anyo', 'id_barrio'], how='left')
+    return dataset
 
 
 def clean_data(sources: dict):
