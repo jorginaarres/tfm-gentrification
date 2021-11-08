@@ -56,31 +56,51 @@ def transform_l1(sources: dict) -> dict:
     return src_l2
 
 
-def transform_dataset(sources: dict) -> pd.DataFrame:
+def transform_dataset(sources: dict, min_anyo: int,
+                      max_anyo: int) -> pd.DataFrame:
     dfs = sources['dataset']
-    merge_on = ['anyo', 'id_barrio', 'nom_barrio']
-    kpis = pd.merge(dfs['antiguedad_vehiculos'], dfs['incidentes'],
-                    on=merge_on, how='left')
+
+    # nom_barrio will be taken from superficie
+    dfs['ocupacion_media_piso'].drop(columns=['nom_barrio'], inplace=True)
+    dfs['natalidad'].drop(columns=['nom_barrio'], inplace=True)
+    dfs['lugares'].drop(columns=['nom_barrio'], inplace=True)
+    dfs['inmigracion'].drop(columns=['nom_barrio'], inplace=True)
+
+    merge_on = ['anyo', 'id_barrio']
+    kpis = pd.merge(dfs['superficie'], dfs['antiguedad_vehiculos'],
+                    on=['id_barrio'],  how='left')
+    kpis = pd.merge(kpis, dfs['incidentes'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['inmigracion'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['natalidad'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['ocupacion_media_piso'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['precio_alquiler'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['precio_compra_venta'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['renta'], on=merge_on, how='left')
-    kpis = pd.merge(kpis, dfs['superficie'], on=['id_barrio', 'nom_barrio'],
-                    how='left')
-    kpis = kpis[kpis['nom_barrio'] != 'No consta']
+    kpis = kpis[kpis['id_barrio'] != 99]
 
     lugares = dfs['lugares']
-    group = ['id_barrio', 'nom_barrio', 'anyo', 'categoria_lugar']
+    group = ['id_barrio', 'anyo', 'categoria_lugar']
     lugares = lugares.rename(columns={'num_locales': 'num_ubicaciones_'})
     lugares = lugares.groupby(group).size().reset_index(name='num_ubic_')
-    lugares['num_ubic_'] = lugares['num_ubic_'].astype(int)
     lugares = lugares.set_index(group).unstack().reset_index()
     col_names = [c[0] + c[1] for c in lugares.columns]
     lugares.columns = col_names
 
+    num_ubics_cols = [col for col in col_names if 'num_ubic' in col]
+    lugares[num_ubics_cols] = lugares[num_ubics_cols].fillna(0)
     dataset = pd.merge(kpis, lugares, on=['anyo', 'id_barrio'], how='left')
+
+    for col in num_ubics_cols:
+        dataset[col] = dataset[col].astype('Int64', errors='ignore')
+
+    dataset['inmigracion_mil_hab'] = np.round(
+        dataset['inmigracion_mil_hab'], 2)
+    dataset['tasa_natalidad_mil_habitantes'] = np.round(
+        dataset['tasa_natalidad_mil_habitantes'], 2)
+
+    dataset = dataset[(dataset['anyo'] >= min_anyo)
+                      & (dataset['anyo'] <= max_anyo)]
+
     return dataset
 
 

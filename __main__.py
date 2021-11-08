@@ -35,7 +35,8 @@ if __name__ == '__main__':
     # 3. Generate a dataset with a row for each neighborhood - year:
     if 'l3' in config['steps']:
         data_l2 = load_data(layer='l2')
-        dataset = transform_dataset(data_l2)
+        dataset = transform_dataset(
+            data_l2,  config['min_year'], config['max_year'])
         save_dfs_to_csv({'dataset': dataset}, config['dataset'])
     # aggregate number of places of each type and add KPIs
 

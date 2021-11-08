@@ -29,8 +29,9 @@ def explode_years(df: pd.DataFrame, min_year: int) -> pd.DataFrame:
 def process_renta(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
     # Since for each neighborhood it is divided by "seccion_censal", we group
     # by year and neighborhood
-    group = ['anyo', 'id_barrio', 'nom_barrio']
+    group = ['anyo', 'id_barrio']
     df = df.groupby(group).agg(importe_eur_anyo=('importe_eur_anyo', 'mean'))
+    df['importe_eur_anyo'] = np.round(df['importe_eur_anyo'], 2)
     df = df.reset_index()
     return df
 
@@ -40,7 +41,7 @@ def process_precio_alquiler(df: pd.DataFrame, config: dict = None
     # since we have data divided by terms, we group by year. In addition,
     # "tipo_valor" column tells if the value of "precio_mes" is the monthly
     # absolute or the monthly by m^2. We will create one column for each value
-    group = ['anyo', 'id_barrio', 'nom_barrio', 'tipo_valor']
+    group = ['anyo', 'id_barrio', 'tipo_valor']
     df = df.groupby(group).agg(precio_mes=('precio_mes', 'mean')).reset_index()
     mean_price = df[df['tipo_valor'] == 'Lloguer mitjà mensual (Euros/mes)']
     mean_price_m2 = df[df['tipo_valor'] ==
@@ -49,8 +50,7 @@ def process_precio_alquiler(df: pd.DataFrame, config: dict = None
     mean_price_m2['precio_mes_m2'] = mean_price_m2['precio_mes']
     mean_price = mean_price.drop(columns=['tipo_valor'])
     mean_price_m2 = mean_price_m2.drop(columns=['precio_mes', 'tipo_valor'])
-    df = pd.merge(mean_price, mean_price_m2,
-                  on=['anyo', 'id_barrio', 'nom_barrio'],
+    df = pd.merge(mean_price, mean_price_m2, on=['anyo', 'id_barrio'],
                   how='inner')
     df['precio_mes_m2'] = np.round(df['precio_mes_m2'], 2)
     df['precio_mes'] = np.round(df['precio_mes'], 2)
@@ -62,7 +62,7 @@ def process_precio_compra_venta(df: pd.DataFrame, config: dict = None
     # filter only by "tipo_valor" == Total. Milers d'euros and group by year
     # and neighorhood to avoid dataset parts that are divided by term
     df = df[df['tipo_valor'] == "Total. Euros/m2 construït"]
-    group = ['anyo', 'id_barrio', 'nom_barrio']
+    group = ['anyo', 'id_barrio']
     df = df.groupby(group).agg(precio_compra_venta_m2=('euros',
                                                        'mean')).reset_index()
     return df
@@ -83,13 +83,13 @@ def process_antiguedad_vehiculos(df: pd.DataFrame, config: dict = None
     df.loc[df['antiguedad'] == "D'11 a 20 anys", 'int_antiguedad'] = '[11-20]'
     df.loc[df['antiguedad'] == "Més de 20 anys", 'int_antiguedad'] = '+20'
 
-    group = ['anyo', 'id_barrio', 'nom_barrio', 'int_antiguedad']
+    group = ['anyo', 'id_barrio', 'int_antiguedad']
     df = df.groupby(group).agg(num_turismos=('num_turismos',
                                              'mean')).reset_index()
 
-    group = ['anyo', 'id_barrio', 'nom_barrio']
-    df['porc_total_barrio'] = (df['num_turismos'] / df.groupby(group)[
-        'num_turismos'].transform('sum'))
+    group = ['anyo', 'id_barrio']
+    df['porc_total_barrio'] = np.round(df['num_turismos'] / df.groupby(group)[
+        'num_turismos'].transform('sum'), 2)
     return df
 
 
@@ -97,8 +97,7 @@ def process_incidentes(df: pd.DataFrame, config: dict = None
                        ) -> pd.DataFrame:
     # filter only by "tipo_valor" == Total. Milers d'euros and group by year
     # and neighorhood to avoid dataset parts that are divided by term
-    group = ['anyo', 'id_barrio', 'nom_barrio',
-             'cod_incidente', 'nom_incidente']
+    group = ['anyo', 'id_barrio', 'cod_incidente', 'nom_incidente']
     df = df.groupby(group).agg(num_incidentes=('num_incidentes',
                                                'sum')).reset_index()
     return df

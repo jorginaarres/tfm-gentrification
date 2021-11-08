@@ -52,7 +52,7 @@ def process_antiguedad_vehiculos(dfs: dict) -> pd.DataFrame:
     df = dfs['antiguedad_vehiculos']
     df = df.rename(columns={'porc_total_barrio': 'vehic_antig_'})
     df = df.drop(columns='num_turismos')
-    df = df.set_index(['anyo', 'id_barrio', 'nom_barrio', 'int_antiguedad'])
+    df = df.set_index(['anyo', 'id_barrio', 'int_antiguedad'])
     df = df.unstack()
     df = df.reset_index()
     col_names = [c[0] + c[1] for c in df.columns]
@@ -72,7 +72,7 @@ def process_incidentes(dfs: dict) -> pd.DataFrame:
     ]
     df = df[df['nom_incidente'].isin(incidentes)]
     df = df[df['id_barrio'].notnull()]
-    df = df.groupby(['anyo', 'id_barrio', 'nom_barrio']) \
+    df = df.groupby(['anyo', 'id_barrio']) \
         .agg(num_incidentes=('num_incidentes', sum)) \
         .reset_index()
     df['anyo'] = df['anyo'].astype(int)
