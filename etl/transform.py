@@ -38,7 +38,7 @@ def transform_raw(sources: dict, config: dict) -> dict:
     return src_l1
 
 
-def transform_l1(sources: dict) -> dict:
+def transform_l1(sources: dict, min_year: int, max_year: int) -> dict:
     src_l2 = {}
     for df_name, dfs in sources.items():
         process_function_name = f'process_{df_name}'
@@ -52,7 +52,10 @@ def transform_l1(sources: dict) -> dict:
 
         else:
             logger.info(f'Calling {process_function_name} for {df_name}')
-            src_l2[df_name] = func(dfs)
+            if process_function_name == 'process_lugares':
+                src_l2[df_name] = func(dfs, min_year, max_year)
+            else:
+                src_l2[df_name] = func(dfs)
     return src_l2
 
 

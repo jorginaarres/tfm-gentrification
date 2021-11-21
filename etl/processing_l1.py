@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def process_lugares(dfs: dict) -> pd.DataFrame:
+def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
     df = pd.concat(dfs.values())
     categories = {
         'ocio': [
@@ -44,7 +44,11 @@ def process_lugares(dfs: dict) -> pd.DataFrame:
     df = df[~df['categoria_lugar'].isin(['Arxius municipals', 'Altres',
                                          "Interiors d'illa"])]
     df = df[df['anyo'].notnull()]
+    df = df[df['id_barrio'].notnull()]
     df['anyo'] = df['anyo'].astype(int, errors='ignore')
+    df = df[(df['anyo'] >= min_year) & (df['anyo'] <= max_year)]
+    date_first_jan = '{}-01-01'
+    df['anyo_date'] = df['anyo'].apply(lambda x: date_first_jan.format(x))
     return df
 
 

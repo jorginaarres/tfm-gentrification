@@ -29,7 +29,7 @@ if __name__ == '__main__':
     # 2. Dataset of all places + others with KPIs
     if 'l2' in config['steps']:
         data_l1 = load_data(layer='l1')
-        data_l2 = transform_l1(data_l1)
+        data_l2 = transform_l1(data_l1, config['min_year'], config['max_year'])
         save_dfs_to_csv(data_l2, config['l2_save_path'])
 
     # 3. Generate a dataset with a row for each neighborhood - year:

@@ -75,13 +75,13 @@ def process_antiguedad_vehiculos(df: pd.DataFrame, config: dict = None
     # cars in each interval of the total in the neighborhood
     int_0_5 = [f'{anyos} anys' for anyos in range(2, 6)]
     int_0_5 = int_0_5 + ["Menys d'un any d'antiguitat", "1 any"]
-    df.loc[df['antiguedad'].isin(int_0_5), 'int_antiguedad'] = '[0-5]'
+    df.loc[df['antiguedad'].isin(int_0_5), 'int_antiguedad'] = '0005_anyos'
 
     int_6_10 = [f'{anyos} anys' for anyos in range(6, 10)]
-    df.loc[df['antiguedad'].isin(int_6_10), 'int_antiguedad'] = '[6-11]'
+    df.loc[df['antiguedad'].isin(int_6_10), 'int_antiguedad'] = '0611_anyos'
 
-    df.loc[df['antiguedad'] == "D'11 a 20 anys", 'int_antiguedad'] = '[11-20]'
-    df.loc[df['antiguedad'] == "Més de 20 anys", 'int_antiguedad'] = '+20'
+    df.loc[df['antiguedad'] == "D'11 a 20 anys", 'int_antiguedad'] = '1120_anyos'
+    df.loc[df['antiguedad'] == "Més de 20 anys", 'int_antiguedad'] = '20_anyos'
 
     group = ['anyo', 'id_barrio', 'int_antiguedad']
     df = df.groupby(group).agg(num_turismos=('num_turismos',
