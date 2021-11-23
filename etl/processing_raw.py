@@ -12,7 +12,7 @@ def years_array_from_created_modified_ts(created: str, modified: str,
                                          min_year: int) -> list:
     created_year = datetime.fromisoformat(created).year
     modified_year = datetime.fromisoformat(modified).year
-    years = list(range(created_year, modified_year))
+    years = list(range(created_year, modified_year+1))
     years = [int(year) for year in years if year >= min_year]
     return years
 
