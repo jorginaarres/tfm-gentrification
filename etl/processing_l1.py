@@ -45,6 +45,7 @@ def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
                                          "Interiors d'illa"])]
     df = df[df['anyo'].notnull()]
     df = df[df['id_barrio'].notnull()]
+    df['id_barrio'] = df['id_barrio'].astype(int, errors='ignore')
     df['anyo'] = df['anyo'].astype(int, errors='ignore')
     df = df[(df['anyo'] >= min_year) & (df['anyo'] <= max_year)]
     date_first_jan = '{}-01-01'
