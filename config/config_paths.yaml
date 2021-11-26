@@ -84,7 +84,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -117,7 +117,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -150,7 +150,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -183,7 +183,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -348,7 +348,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -381,7 +381,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -414,7 +414,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -447,7 +447,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -457,7 +457,7 @@ data_sources:
       sep: ","
       schema_mode: infer  # explicit or infer
       filters:
-        tipo_local: [Restaurants]
+        tipo_lugar: [Restaurants]
 
     centros_comerciales:
       format: csv
@@ -482,7 +482,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -515,7 +515,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -548,7 +548,7 @@ data_sources:
         - nombre
         - id_barrio
         - nom_barrio
-        - tipo_local
+        - tipo_lugar
         - geo_epgs_25831_x
         - geo_epgs_25831_y
         - geo_epgs_4326_x
@@ -558,41 +558,41 @@ data_sources:
       sep: ","
       schema_mode: infer  # explicit or infer
 
-    antiguedad_vehiculos:
-      format: csv
-      local:
-        - data/raw/antiguedad_vehiculos/2018_antiguitat_turismes.csv
-        - data/raw/antiguedad_vehiculos/2017_antiguitat_turismes.csv
-        - data/raw/antiguedad_vehiculos/2016_antiguitat_turismes.csv
-        - data/raw/antiguedad_vehiculos/2015_antiguitat_turismes.csv
-        - data/raw/antiguedad_vehiculos/2014_antiguitat_turismes.csv
-      url:
-        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/e0308051-6cec-4272-a6ee-9e56fecd5a44/download/2018_antiguitat_turismes.csv
-        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3634f3f5-4e3f-4c10-a427-b5a25b7c972c/download/2017_antiguitat_turismes.csv
-        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/098f20b7-5b0f-4150-ae1e-94161b515086/download/2016_antiguitat_turismes.csv
-        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3df08917-eaf1-4a75-b4db-cbf425de6f3c/download/2015_antiguitat_turismes.csv
-        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/036a29c0-38a3-4a8e-81c2-19a38f58d634/download/2014_antiguitat_turismes.csv
-      select:
-        - Any
-        - Codi_Barri
-        - Nom_Barri
-        - Antiguitat
-        - Nombre_turismes
-      column_alias:
-        - anyo
-        - id_barrio
-        - nom_barrio
-        - antiguedad
-        - num_turismos
-      header: 0
-      sep: ","
-      schema_mode: explicit  # explicit or infer
-      schema:
-        anyo: int
-        id_barrio: int
-        nom_barrio: str
-        antiguedad: str
-        num_turismos: int
+#    antiguedad_vehiculos:
+#      format: csv
+#      local:
+#        - data/raw/antiguedad_vehiculos/2018_antiguitat_turismes.csv
+#        - data/raw/antiguedad_vehiculos/2017_antiguitat_turismes.csv
+#        - data/raw/antiguedad_vehiculos/2016_antiguitat_turismes.csv
+#        - data/raw/antiguedad_vehiculos/2015_antiguitat_turismes.csv
+#        - data/raw/antiguedad_vehiculos/2014_antiguitat_turismes.csv
+#      url:
+#        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/e0308051-6cec-4272-a6ee-9e56fecd5a44/download/2018_antiguitat_turismes.csv
+#        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3634f3f5-4e3f-4c10-a427-b5a25b7c972c/download/2017_antiguitat_turismes.csv
+#        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/098f20b7-5b0f-4150-ae1e-94161b515086/download/2016_antiguitat_turismes.csv
+#        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/3df08917-eaf1-4a75-b4db-cbf425de6f3c/download/2015_antiguitat_turismes.csv
+#        - https://opendata-ajuntament.barcelona.cat/data/es/dataset/93835096-d16b-455a-9e13-230e8cf0e371/resource/036a29c0-38a3-4a8e-81c2-19a38f58d634/download/2014_antiguitat_turismes.csv
+#      select:
+#        - Any
+#        - Codi_Barri
+#        - Nom_Barri
+#        - Antiguitat
+#        - Nombre_turismes
+#      column_alias:
+#        - anyo
+#        - id_barrio
+#        - nom_barrio
+#        - antiguedad
+#        - num_turismos
+#      header: 0
+#      sep: ","
+#      schema_mode: explicit  # explicit or infer
+#      schema:
+#        anyo: int
+#        id_barrio: int
+#        nom_barrio: str
+#        antiguedad: str
+#        num_turismos: int
 
     natalidad:
       format: csv
@@ -725,9 +725,9 @@ data_sources:
       lugares_culto: data/L1/lugares_culto.csv
       parques_jardines: data/L1/parques_jardines.csv
       restaurantes: data/L1/restaurantes.csv
-      roba_amiga: data/L1/roba_amiga.csv
-    antiguedad_vehiculos:
-      antiguedad_vehiculos: data/L1/antiguedad_vehiculos.csv
+#      roba_amiga: data/L1/roba_amiga.csv
+#    antiguedad_vehiculos:
+#      antiguedad_vehiculos: data/L1/antiguedad_vehiculos.csv
     incidentes:
       incidentes: data/L1/incidentes.csv
     inmigracion:
@@ -748,7 +748,7 @@ data_sources:
   l2:
     dataset:
       lugares: data/L2/lugares.csv
-      antiguedad_vehiculos: data/L2/antiguedad_vehiculos.csv
+#      antiguedad_vehiculos: data/L2/antiguedad_vehiculos.csv
       incidentes: data/L2/incidentes.csv
       inmigracion: data/L2/inmigracion.csv
       natalidad: data/L2/natalidad.csv

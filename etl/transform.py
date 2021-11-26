@@ -70,9 +70,8 @@ def transform_dataset(sources: dict, min_anyo: int,
     dfs['inmigracion'].drop(columns=['nom_barrio'], inplace=True)
 
     merge_on = ['anyo', 'id_barrio']
-    kpis = pd.merge(dfs['superficie'], dfs['antiguedad_vehiculos'],
-                    on=['id_barrio'],  how='left')
-    kpis = pd.merge(kpis, dfs['incidentes'], on=merge_on, how='left')
+    kpis = pd.merge(dfs['superficie'], dfs['incidentes'], on=['id_barrio'],
+                    how='left')
     kpis = pd.merge(kpis, dfs['inmigracion'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['natalidad'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['ocupacion_media_piso'], on=merge_on, how='left')

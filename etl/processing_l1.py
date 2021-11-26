@@ -37,7 +37,7 @@ def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
         'centros_comerciales': ['Grans centres comercials']
     }
 
-    df['categoria_lugar'] = df['tipo_local']
+    df['categoria_lugar'] = df['tipo_lugar']
     for category, mappings in categories.items():
         df['categoria_lugar'].replace(mappings, category, inplace=True)
 
