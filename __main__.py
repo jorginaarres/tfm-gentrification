@@ -2,8 +2,9 @@ from utils.utils import load_yaml
 from etl.extract import load_data
 from utils.utils import save_dfs_to_csv
 from etl.transform import (transform_raw, transform_l1, clean_data,
-                           transform_dataset)
+                           transform_dataset, transform_geodata)
 import logging
+import pandas as pd
 
 
 if __name__ == '__main__':
@@ -38,7 +39,13 @@ if __name__ == '__main__':
         dataset = transform_dataset(
             data_l2,  config['min_year'], config['max_year'])
         save_dfs_to_csv({'dataset': dataset}, config['dataset'])
-    # aggregate number of places of each type and add KPIs
+
+    if 'geo' in config['steps']:
+        dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
+        transform_geodata(dataset)
+
+
+
 
 
 

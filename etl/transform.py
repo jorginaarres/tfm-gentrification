@@ -5,6 +5,7 @@ from utils.utils import count_nulls
 import etl.processing_raw as processing_raw
 import etl.processing_l1 as processing_l1
 from io import StringIO
+import geopandas as gpd
 
 logger = logging.getLogger(__name__)
 
@@ -104,6 +105,13 @@ def transform_dataset(sources: dict, min_anyo: int,
                       & (dataset['anyo'] <= max_anyo)]
 
     return dataset
+
+
+def transform_geodata(dataset: pd.DataFrame):
+    shapefile_path = './data/shapefiles/barris.geojson'
+    gdf = gpd.read_file(shapefile_path, encoding='utf-8')
+    print(gdf)
+
 
 
 def clean_data(sources: dict):
