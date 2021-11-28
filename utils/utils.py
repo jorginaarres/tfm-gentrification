@@ -1,6 +1,7 @@
 import yaml
 import logging
 import pandas as pd
+import geopandas as gpd
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -23,3 +24,6 @@ def save_dfs_to_csv(dfs: dict, path: str):
         dataset_path = f'{path}{df_name}.csv'
         df.to_csv(dataset_path, index=False, encoding='utf-8')
 
+
+def save_gdf_to_geojson(gdf: gpd.GeoDataFrame):
+    gdf.to_file("data/dataset/dataset.geojson", driver='GeoJSON')

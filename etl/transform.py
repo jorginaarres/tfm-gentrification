@@ -103,6 +103,9 @@ def transform_dataset(sources: dict, min_anyo: int,
 
     dataset = dataset[(dataset['anyo'] >= min_anyo)
                       & (dataset['anyo'] <= max_anyo)]
+    date_first_jan = '{}-01-01'
+    dataset['anyo_date'] = dataset['anyo'].apply(lambda x:
+                                                 date_first_jan.format(x))
 
     return dataset
 
@@ -110,7 +113,10 @@ def transform_dataset(sources: dict, min_anyo: int,
 def transform_geodata(dataset: pd.DataFrame):
     shapefile_path = './data/shapefiles/barris.geojson'
     gdf = gpd.read_file(shapefile_path, encoding='utf-8')
-    print(gdf)
+    gdf['BARRI'] = gdf['BARRI'].astype(np.int32)
+    gdf_dataset = gdf.merge(dataset, left_on='BARRI', right_on='id_barrio',
+                            how='left')
+    return gdf_dataset
 
 
 
