@@ -43,4 +43,4 @@ if __name__ == '__main__':
     if 'geo' in config['steps']:
         dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
         dataset_geo = transform_geodata(dataset)
-        save_gdf_to_geojson(dataset_geo)
+        save_gdf_to_geojson(dataset_geo, filename='dataset')

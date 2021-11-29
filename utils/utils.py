@@ -25,5 +25,5 @@ def save_dfs_to_csv(dfs: dict, path: str):
         df.to_csv(dataset_path, index=False, encoding='utf-8')
 
 
-def save_gdf_to_geojson(gdf: gpd.GeoDataFrame):
-    gdf.to_file("data/dataset/dataset.geojson", driver='GeoJSON')
+def save_gdf_to_geojson(gdf: gpd.GeoDataFrame, filename: str):
+    gdf.to_file(f"data/dataset/{filename}.geojson", driver='GeoJSON')

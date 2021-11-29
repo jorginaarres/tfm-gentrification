@@ -50,6 +50,10 @@ def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
     df = df[(df['anyo'] >= min_year) & (df['anyo'] <= max_year)]
     date_first_jan = '{}-01-01'
     df['anyo_date'] = df['anyo'].apply(lambda x: date_first_jan.format(x))
+    df = df.rename(columns={'geo_epgs_4326_x': 'lat',
+                            'geo_epgs_4326_y': 'lon'})
+    df = df[(41.0 < df['lat']) & (df['lat'] < 42.0)
+            & (2.0 < df['lon']) & (df['lon'] < 2.5)]
     return df
 
 
