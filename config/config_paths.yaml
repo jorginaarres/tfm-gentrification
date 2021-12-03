@@ -61,6 +61,39 @@ data_sources:
         seccion_censal: int
         importe_eur_anyo: int
 
+    censo_negocios_2019:
+      format: csv
+      local: data/raw/2019_censcomercialbcn_detall.csv
+      url: https://opendata-ajuntament.barcelona.cat/data/dataset/62fb990e-4cc3-457a-aea1-497604e15659/resource/c897c912-0f3c-4463-bdf2-a67ee97786ac/download/2019_censcomercialbcn_detall.csv
+      select:
+        - Nom_Grup_Activitat
+        - Nom_Activitat
+        - Nom_Local
+        - Latitud
+        - Longitud
+        - Codi_Barri
+        - Nom_Barri
+      column_alias:
+        - grupo_actividad
+        - nom_actividad
+        - nombre
+        - lat
+        - lon
+        - id_barrio
+        - nom_barrio
+      header: 0
+      encoding: 'utf-8'
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        grupo_actividad: str
+        nom_actividad: str
+        nombre: str
+        latitud: float
+        longitud: float
+        id_barrio: int
+        nom_barrio: str
+
     espacios_musica_copas:
       format: csv
       local: data/raw/opendatabcn_cultura_espais-de-musica-i-copes.csv
@@ -196,14 +229,14 @@ data_sources:
     precio_alquiler:
       format: csv
       local:
-        - data/raw/precio_alquiler_mensual/2021_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2020_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2019_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2018_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2017_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2016_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2015_Lloguer_preu_trim.csv
-        - data/raw/precio_alquiler_mensual/2014_Lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2021_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2020_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2019_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2018_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2017_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2016_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2015_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2014_lloguer_preu_trim.csv
       url:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/cfc45f2b-62eb-4621-8486-1b90e36b4bfe/download/2021_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/47c9d64d-317a-45d0-8c45-45488df8601c/download/2020_lloguer_preu_trim.csv
@@ -728,6 +761,8 @@ data_sources:
 #      roba_amiga: data/L1/roba_amiga.csv
 #    antiguedad_vehiculos:
 #      antiguedad_vehiculos: data/L1/antiguedad_vehiculos.csv
+    censo_negocios_2019:
+      censo_negocios_2019: data/L1/censo_negocios_2019.csv
     incidentes:
       incidentes: data/L1/incidentes.csv
     inmigracion:

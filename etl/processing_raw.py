@@ -118,5 +118,11 @@ def process_generic_dataset(df: pd.DataFrame,
     return df
 
 
+def process_censo_negocios_2019(df: pd.DataFrame,
+                                config: dict = None) -> pd.DataFrame:
+    df = df.drop_duplicates()
+    return df
+
+
 def skip_processing(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
     return df

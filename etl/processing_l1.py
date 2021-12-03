@@ -57,6 +57,61 @@ def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
     return df
 
 
+def process_censo_negocios_2019(dfs: dict) -> pd.DataFrame:
+    df = dfs['censo_negocios_2019']
+    categories = {
+        'minoristas_alimentacion_supermercado': [
+            'Carn i Porc', 'Peix i marisc', 'Ous i aus',
+            'Pa, pastisseria i làctics', 'Autoservei / Supermercat',
+            'Fruites i verdures', 'Plats preparats (no degustació)',
+            'Herbolaris, dietètica i NUTRICIÓ'
+        ],
+        'sanidad': [
+            'Farmàcies PARAFARMÀCIA', 'Sanitat i assistència',
+            'Veterinaris / Mascotes'
+        ],
+        'negocios_tradicionales': [
+            'Calçat i pell', 'Merceria', 'Joieria, rellotgeria i bijuteria',
+            'Tintoreries', 'Parament ferreteria', 'Vehicles',
+            'Llibres, diaris i revistes',
+            'Reparacions (Electrodomèstics i automòbils)',
+            'Segells, monedes i antiguitats', 'Floristeries',
+            'Mobles i articles fusta i metall', 'Fabricació tèxtil',
+            'Souvenirs i basars',   'Locutoris',  'Souvenirs',  'Basars',
+            'Informàtica', 'Òptiques i fotografia'
+        ],
+        'estetica_peluquerias': [
+            "Centres d'estètica", 'Drogueria i perfumeria', 'Perruqueries'
+        ],
+        'ropa_cc': ['Grans magatzems i hipermercats', 'Vestir'],
+        'ocio_cultura': [
+            'Música',
+            'Bars especials amb actuació / Bars musicals / Discoteques /PUB',
+            'Equipaments culturals i recreatius', 'Arts gràfiques',
+            'Fotografia'
+        ],
+        'restaurantes': [
+            'Xocolateries / Geladeries / Degustació', 'Restaurants', 'Begudes',
+            'Serveis de menjar take away MENJAR RÀPID', 'Bars   / CIBERCAFÈ',
+            'serveis de menjar i begudes'
+        ],
+        'alojamiento': ["serveis d'allotjament"],
+        'educacion': ['Ensenyament'],
+        'culto': ['Equipaments religiosos'],
+        'deporte': [
+            'Esports', 'Joguines i esports', 'Gimnàs /fitnes',
+            'Altres equipaments esportius'
+        ]
+    }
+
+    df['categoria_lugar'] = df['nom_actividad']
+    for category, mappings in categories.items():
+        df['categoria_lugar'].replace(mappings, category, inplace=True)
+
+    df = df[df['categoria_lugar'].isin(categories.keys())]
+    return df
+
+
 def process_antiguedad_vehiculos(dfs: dict) -> pd.DataFrame:
     df = dfs['antiguedad_vehiculos']
     df = df.rename(columns={'porc_total_barrio': 'vehic_antig_'})
