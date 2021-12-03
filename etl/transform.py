@@ -137,55 +137,79 @@ def clean_data(sources: dict):
     return sources
 
 
-def transform_places_normalized(dataset: pd.DataFrame):
-    cols_ubic = [col for col in dataset.columns if col.startswith('num_ubic')]
-    cols = ['id_barrio', 'nom_barrio', 'anyo'] + cols_ubic
-    df = dataset[cols]
-    df = df[df['anyo'] == 2018].reset_index(drop=True)
-    df = df.drop(columns=['anyo'])
+def transform_places_normalized(lugares: pd.DataFrame):
+    group = ['id_barrio', 'nom_barrio', 'categoria_lugar']
+    lugares = lugares.groupby(group).size().reset_index(name='num_ubic_')
+    lugares = lugares.set_index(group).unstack().reset_index()
+    col_names = [c[0] + c[1] for c in lugares.columns]
+    lugares.columns = col_names
+
+    num_ubics_cols = [col for col in col_names if 'num_ubic' in col]
+    lugares[num_ubics_cols] = lugares[num_ubics_cols].fillna(0).astype(int)
+
+    cols_ubic = [col for col in lugares.columns if col.startswith('num_ubic')]
+    df = lugares
 
     df['total_barrio'] = df[cols_ubic].sum(axis=1)
     df['total_bcn'] = df['total_barrio'].sum()
 
-    df['cc'] = df['num_ubic_centros_comerciales'] / df['total_barrio']
-    df['ocio'] = df['num_ubic_ocio'] / df['total_barrio']
-    df['cultura'] = df['num_ubic_cultura'] / df['total_barrio']
-    df['parques_jardines'] = (df['num_ubic_parques_jardines']
-                              / df['total_barrio'])
-    df['sanidad'] = df['num_ubic_sanidad'] / df['total_barrio']
+    df['alojamiento'] = df['num_ubic_alojamiento'] / df['total_barrio']
+    df['culto'] = df['num_ubic_culto'] / df['total_barrio']
     df['deporte'] = df['num_ubic_deporte'] / df['total_barrio']
-    df['gastronomia'] = df['num_ubic_gastronomia'] / df['total_barrio']
-    df['hoteles'] = df['num_ubic_hoteles'] / df['total_barrio']
-    df['culto'] = df['num_ubic_lugares_culto'] / df['total_barrio']
+    df['restaurantes'] = df['num_ubic_restaurantes'] / df['total_barrio']
+    df['ocio_cultura'] = df['num_ubic_ocio_cultura'] / df['total_barrio']
+    df['ropa_cc'] = df['num_ubic_ropa_cc'] / df['total_barrio']
+    df['sanidad'] = df['num_ubic_sanidad'] / df['total_barrio']
+    df['educacion'] = df['num_ubic_educacion'] / df['total_barrio']
+    df['estetica_peluquerias'] = (df['num_ubic_estetica_peluquerias']
+                                  / df['total_barrio'])
+    df['negocios_tradicionales'] = (df['num_ubic_negocios_tradicionales']
+                                    / df['total_barrio'])
+    df['minoristas_alimentacion_supermercado'] = (
+        df['num_ubic_minoristas_alimentacion_supermercado']
+        / df['total_barrio'])
 
     df.loc['Total'] = df.sum()
-
     df.loc['Total', 'id_barrio'] = 99
     df.loc['Total', 'nom_barrio'] = 'Media'
     df.loc['Total', 'total_bcn'] = df.loc[0, 'total_bcn']
 
-    df.loc['Total', 'cc'] = (df.loc['Total', 'num_ubic_centros_comerciales']
-                             / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'ocio'] = (df.loc['Total', 'num_ubic_ocio']
-                               / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'cultura'] = (df.loc['Total', 'num_ubic_cultura']
-                                  / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'parques_jardines'] = (
-            df.loc['Total', 'num_ubic_parques_jardines']
-            / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'sanidad'] = (df.loc['Total', 'num_ubic_sanidad']
-                                  / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'alojamiento'] = (
+            df.loc['Total', 'num_ubic_alojamiento']
+            / df.loc['Total', 'total_bcn']
+    )
+    df.loc['Total', 'culto'] = (df.loc['Total', 'num_ubic_culto']
+                                / df.loc['Total', 'total_bcn'])
     df.loc['Total', 'deporte'] = (df.loc['Total', 'num_ubic_deporte']
                                   / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'gastronomia'] = (df.loc['Total', 'num_ubic_gastronomia']
-                                      / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'hoteles'] = (df.loc['Total', 'num_ubic_hoteles']
+    df.loc['Total', 'restaurantes'] = (df.loc['Total', 'num_ubic_restaurantes']
+                                       / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'ocio_cultura'] = (df.loc['Total', 'num_ubic_ocio_cultura']
+                                       / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'ropa_cc'] = (df.loc['Total', 'num_ubic_ropa_cc']
                                   / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'culto'] = (df.loc['Total', 'num_ubic_lugares_culto']
-                                / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'sanidad'] = (df.loc['Total', 'num_ubic_sanidad']
+                                  / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'educacion'] = (df.loc['Total', 'num_ubic_educacion']
+                                    / df.loc['Total', 'total_bcn'])
+    df.loc['Total', 'estetica_peluquerias'] = (
+            df.loc['Total', 'num_ubic_estetica_peluquerias']
+            / df.loc['Total', 'total_bcn']
+    )
+    df.loc['Total', 'negocios_tradicionales'] = (
+            df.loc['Total', 'num_ubic_negocios_tradicionales']
+            / df.loc['Total', 'total_bcn']
+    )
+    df.loc['Total', 'minoristas_alimentacion_supermercado'] = (
+            df.loc['Total', 'num_ubic_minoristas_alimentacion_supermercado']
+            / df.loc['Total', 'total_bcn']
+    )
 
-    new_cols = ['cc', 'ocio', 'cultura', 'parques_jardines', 'sanidad',
-                'deporte', 'gastronomia', 'hoteles', 'culto']
+    new_cols = ['alojamiento', 'culto', 'deporte', 'restaurantes',
+                'ocio_cultura', 'ropa_cc', 'sanidad', 'educacion',
+                'estetica_peluquerias',  'negocios_tradicionales',
+                'minoristas_alimentacion_supermercado']
+
     df = df[['nom_barrio'] + new_cols]
 
     total = df[df.index == 'Total']
