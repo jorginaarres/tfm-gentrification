@@ -2,7 +2,8 @@ from utils.utils import load_yaml
 from etl.extract import load_data
 from utils.utils import save_dfs_to_csv, save_gdf_to_geojson
 from etl.transform import (transform_raw, transform_l1, clean_data,
-                           transform_dataset, transform_geodata)
+                           transform_dataset, transform_geodata,
+                           transform_places_normalized)
 import logging
 import pandas as pd
 
@@ -44,3 +45,11 @@ if __name__ == '__main__':
         dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
         dataset_geo = transform_geodata(dataset)
         save_gdf_to_geojson(dataset_geo, filename='dataset')
+
+    if 'analysis' in config['steps']:
+        dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
+        palces_norm = transform_places_normalized(dataset)
+        save_dfs_to_csv({'ubics_radar': palces_norm}, config['dataset'])
+
+
+
