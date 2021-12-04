@@ -161,11 +161,11 @@ def transform_places_normalized(lugares: pd.DataFrame):
     df['ropa_cc'] = df['num_ubic_ropa_cc'] / df['total_barrio']
     df['sanidad'] = df['num_ubic_sanidad'] / df['total_barrio']
     df['educacion'] = df['num_ubic_educacion'] / df['total_barrio']
-    df['estetica_peluquerias'] = (df['num_ubic_estetica_peluquerias']
+    df['estet_peluq'] = (df['num_ubic_estetica_peluquerias']
                                   / df['total_barrio'])
-    df['negocios_tradicionales'] = (df['num_ubic_negocios_tradicionales']
+    df['neg_trad'] = (df['num_ubic_negocios_tradicionales']
                                     / df['total_barrio'])
-    df['minoristas_alimentacion_supermercado'] = (
+    df['alim_super'] = (
         df['num_ubic_minoristas_alimentacion_supermercado']
         / df['total_barrio'])
 
@@ -192,23 +192,22 @@ def transform_places_normalized(lugares: pd.DataFrame):
                                   / df.loc['Total', 'total_bcn'])
     df.loc['Total', 'educacion'] = (df.loc['Total', 'num_ubic_educacion']
                                     / df.loc['Total', 'total_bcn'])
-    df.loc['Total', 'estetica_peluquerias'] = (
+    df.loc['Total', 'estet_peluq'] = (
             df.loc['Total', 'num_ubic_estetica_peluquerias']
             / df.loc['Total', 'total_bcn']
     )
-    df.loc['Total', 'negocios_tradicionales'] = (
+    df.loc['Total', 'neg_trad'] = (
             df.loc['Total', 'num_ubic_negocios_tradicionales']
             / df.loc['Total', 'total_bcn']
     )
-    df.loc['Total', 'minoristas_alimentacion_supermercado'] = (
+    df.loc['Total', 'alim_super'] = (
             df.loc['Total', 'num_ubic_minoristas_alimentacion_supermercado']
             / df.loc['Total', 'total_bcn']
     )
 
     new_cols = ['alojamiento', 'culto', 'deporte', 'restaurantes',
                 'ocio_cultura', 'ropa_cc', 'sanidad', 'educacion',
-                'estetica_peluquerias',  'negocios_tradicionales',
-                'minoristas_alimentacion_supermercado']
+                'estet_peluq',  'neg_trad', 'alim_super']
 
     df = df[['nom_barrio'] + new_cols]
 
