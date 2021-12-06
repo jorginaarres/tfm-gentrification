@@ -4,6 +4,7 @@ from utils.utils import save_dfs_to_csv, save_gdf_to_geojson
 from etl.transform import (transform_raw, transform_l1, clean_data,
                            transform_dataset, transform_geodata,
                            transform_places_normalized)
+from clustering.kmeans import apply_kmeans
 import logging
 import pandas as pd
 
@@ -50,6 +51,13 @@ if __name__ == '__main__':
         places = pd.read_csv('data/L2/censo_negocios_2019.csv', header=0)
         palces_norm = transform_places_normalized(places)
         save_dfs_to_csv({'ubics_radar': palces_norm}, config['dataset'])
+
+    if 'clustering' in config['steps']:
+        dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
+        kmeans = apply_kmeans(dataset)
+
+
+
 
 
 
