@@ -103,6 +103,6 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     df['cluster_k4'] = df['cluster_k4'].replace({2: 0, 0: 2, 3: 1, 1: 3})
 
     df_cluster = df[['id_barrio', 'nom_barrio', 'cluster_k3', 'cluster_k4']]
-    df_cluster.to_csv('data/dataset/kmeans_dataset.csv', index=False)
+    df_cluster.to_csv('data/dataset/kmeans_clusters.csv', index=False)
     return df_cluster
 

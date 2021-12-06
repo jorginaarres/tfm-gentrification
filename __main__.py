@@ -55,6 +55,8 @@ if __name__ == '__main__':
     if 'clustering' in config['steps']:
         dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
         kmeans = apply_kmeans(dataset)
+        kmeans_geo = transform_geodata(kmeans)
+        save_gdf_to_geojson(kmeans_geo, filename='kmeans_dataset')
 
 
 
