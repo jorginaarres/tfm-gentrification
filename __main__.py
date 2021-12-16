@@ -5,6 +5,7 @@ from etl.transform import (transform_raw, transform_l1, clean_data,
                            transform_dataset, transform_geodata,
                            transform_places_normalized)
 from clustering.kmeans import apply_kmeans
+from analysis.kpis_evolution import kpi_evolution
 import logging
 import pandas as pd
 
@@ -57,6 +58,12 @@ if __name__ == '__main__':
         kmeans = apply_kmeans(dataset)
         kmeans_geo = transform_geodata(kmeans)
         save_gdf_to_geojson(kmeans_geo, filename='kmeans_dataset')
+
+    if 'kpi_evo' in config['steps']:
+        dataset = pd.read_csv('data/dataset/dataset.csv', header=0)
+        results = kpi_evolution(dataset)
+        save_dfs_to_csv(results, config['analysis_path'])
+
 
 
 

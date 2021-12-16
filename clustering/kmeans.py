@@ -17,6 +17,16 @@ def plot_elbow(sse, ks):
     plt.show()
 
 
+def plot_silhouette(sils, ks):
+    fig, axis = plt.subplots(figsize=(9, 6))
+    axis.set_title('Silhouette method')
+    axis.set_xlabel('k')
+    axis.set_ylabel('Silhouette')
+    plt.plot(ks, sils, marker='o')
+    plt.tight_layout()
+    plt.show()
+
+
 def elbow_method(data):
     sse = []
     ks = range(2, 10)
@@ -29,12 +39,15 @@ def elbow_method(data):
 
 def silhouette_method(data):
     ks = range(2, 10)
+    sils = []
     for k in ks:
         clusterer = KMeans(n_clusters=k, random_state=55)
         cluster_labels = clusterer.fit_predict(data)
         silhouette_avg = silhouette_score(data, cluster_labels)
+        sils.append(silhouette_avg)
         print("For n_clusters =", k, "The average silhouette_score is :",
               silhouette_avg)
+    plot_silhouette(sils, ks)
 
 
 def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
@@ -76,6 +89,7 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
 
     # 3 Correlations
     corr_matrix = df2.corr()
+    corr_matrix = np.round(corr_matrix, 2)
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(corr_matrix, annot=True, fmt="g", cmap='viridis', ax=ax,
                 xticklabels=kpis, yticklabels=kpis)
@@ -94,7 +108,6 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     clusterer = KMeans(n_clusters=3, random_state=55)
     cluster_labels = clusterer.fit_predict(df2)
     df['cluster_k3'] = cluster_labels
-    print(df)
 
     # kmeans with k=4
     clusterer = KMeans(n_clusters=4, random_state=55)
