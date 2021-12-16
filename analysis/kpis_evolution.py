@@ -21,7 +21,8 @@ def kpi_evolution(df: pd.DataFrame):
                                    df_diff[var_2018] - df_diff[var_2015],
                                    df_diff[var_2015] - df_diff[var_2018])
 
-        df_diff['diff_perc'] = np.round(df_diff['diff'] / df_diff[var_2015], 3)
+        df_diff['diff_perc'] = np.round(100*(df_diff['diff'] / df_diff[
+            var_2015]), 2)
 
         df_diff['evolution'] = np.where(
             df_diff[var_2015] <= df_diff[var_2018],
@@ -29,7 +30,14 @@ def kpi_evolution(df: pd.DataFrame):
             '-' + df_diff['diff_perc'].astype(str) + '%'
         )
         df_diff = df_diff.sort_values(by='diff_perc', ascending=False)
-        results[var] = df_diff[['nom_barrio', 'evolution']]
+
+        if var == 'num_incidentes':
+            df_diff = df_diff[df_diff[var_2015] > 1000]
+
+        res = df_diff[['nom_barrio', 'evolution']]
+        res = res.rename(columns={'nom_barrio': 'Barrio',
+                                  'evolution': 'Evolución'})
+        results[var] = res
 
     return results
 
