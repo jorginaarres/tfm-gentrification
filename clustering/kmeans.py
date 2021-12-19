@@ -109,19 +109,21 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     clusterer = KMeans(n_clusters=3, random_state=55)
     cluster_labels = clusterer.fit_predict(df2)
     df['cluster_k3'] = cluster_labels
-    dataset['cluster_k3'] = cluster_labels
+    k3 = df[['id_barrio', 'nom_barrio', 'cluster_k3']]
+    dataset_k3 = pd.merge(dataset, k3, on=['id_barrio', 'nom_barrio'])
     dataset_k3 = (
-        dataset
-        .groupby(['id_barrio', 'nom_barrio', 'anyo', 'cluster_k3'])
-        .agg(num_incidentes=('num_incidentes', 'avg'),
-             inmigracion_mil_hab=('inmigracion_mil_hab', 'avg'),
+        dataset_k3
+        .groupby(['anyo', 'cluster_k3'])
+        .agg(num_incidentes=('num_incidentes', 'mean'),
+             inmigracion_mil_hab=('inmigracion_mil_hab', 'mean'),
              tasa_natalidad_mil_habitantes=(
-                 'tasa_natalidad_mil_habitantes', 'avg'),
+                 'tasa_natalidad_mil_habitantes', 'mean'),
              num_personas_por_domicilio=(
-                 'num_personas_por_domicilio', 'avg'),
-             precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'avg'),
-             precio_compra_venta_m2=('precio_compra_venta_m2', 'avg'),
-             renta=('renta', 'avg'))
+                 'num_personas_por_domicilio', 'mean'),
+             precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'mean'),
+             precio_compra_venta_m2=('precio_compra_venta_m2', 'mean'),
+             renta=('renta', 'mean'))
+        .reset_index()
     )
     dataset_k3.to_csv('data/dataset/dataset_clusters_3.csv', index=False)
 
@@ -130,22 +132,24 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     cluster_labels = clusterer.fit_predict(df2)
     df['cluster_k4'] = cluster_labels
     df['cluster_k4'] = df['cluster_k4'].replace({2: 0, 0: 2, 3: 1, 1: 3})
-    dataset['cluster_k4'] = cluster_labels
     df_cluster = df[['id_barrio', 'nom_barrio', 'cluster_k3', 'cluster_k4']]
     df_cluster.to_csv('data/dataset/kmeans_clusters.csv', index=False)
 
+    k4 = df[['id_barrio', 'nom_barrio', 'cluster_k4']]
+    dataset_k4 = pd.merge(dataset, k4, on=['id_barrio', 'nom_barrio'])
     dataset_k4 = (
-        dataset
-        .groupby(['id_barrio', 'nom_barrio', 'anyo', 'cluster_k4'])
-        .agg(num_incidentes=('num_incidentes', 'avg'),
-             inmigracion_mil_hab=('inmigracion_mil_hab', 'avg'),
+        dataset_k4
+        .groupby(['anyo', 'cluster_k4'])
+        .agg(num_incidentes=('num_incidentes', 'mean'),
+             inmigracion_mil_hab=('inmigracion_mil_hab', 'mean'),
              tasa_natalidad_mil_habitantes=(
-                 'tasa_natalidad_mil_habitantes', 'avg'),
+                 'tasa_natalidad_mil_habitantes', 'mean'),
              num_personas_por_domicilio=(
-                 'num_personas_por_domicilio', 'avg'),
-             precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'avg'),
-             precio_compra_venta_m2=('precio_compra_venta_m2', 'avg'),
-             renta=('renta', 'avg'))
+                 'num_personas_por_domicilio', 'mean'),
+             precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'mean'),
+             precio_compra_venta_m2=('precio_compra_venta_m2', 'mean'),
+             renta=('renta', 'mean'))
+        .reset_index()
     )
     dataset_k4.to_csv('data/dataset/dataset_clusters_4.csv', index=False)
     return df_cluster
