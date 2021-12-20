@@ -1,5 +1,7 @@
 # tfm-gentrification-prediction
 
+![UOC](https://upload.wikimedia.org/wikipedia/commons/a/a3/Logo_blau_uoc.png)
+
 Este es el repositorio del código correspondiente al desarrollo del proyecto de final
 de máster en Ciencia de Datos de la UOC con título "Estudio de los factores de gentrificación de los barrios de las
 grandes ciudades".
@@ -21,7 +23,7 @@ estos pasos que se quieren ejecutar, los cuales pueden ser los siguientes:
 - **analysis**: Genera el dataset que se subirá a Flourish con la distribución de ubicaciones/negocios por barrio en 2019 
 - que será representado con gráficos de radar
 - **clustering**: Prepara los datos y ejecuta el algoritmo de k-means
-- **kpi_evo: Genera el dataset que se subirá a Flourish para crear la visualización de gráficos de líneas de la evolución 
+- **kpi_evo**: Genera el dataset que se subirá a Flourish para crear la visualización de gráficos de líneas de la evolución 
 - de las distintas variables en los barrios
 
 En el repositorio no está incluida la parte de datos, por lo que los ficheros CSV
