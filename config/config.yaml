@@ -1,5 +1,5 @@
 data_source: local
-steps: [clustering]  # l1, l2, l3,
+steps: [l1, l2, l3, geo, analysis, clustering, kpi_evo]
 min_year: 2015
 max_year: 2018
 l1_save_path: data/L1/
