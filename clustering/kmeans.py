@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing, cluster
+from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib.pyplot as plt
@@ -99,6 +100,11 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
 
     # Remove highly correlated variables
     df2 = df2.drop(columns=[1])
+
+    # try PCA
+    pca = PCA(n_components=6)
+    pca.fit(df2)
+    print(f'Variancia explicada PCA: {pca.explained_variance_ratio_}')
 
     # Optimal k
     silhouette_method(df2)
