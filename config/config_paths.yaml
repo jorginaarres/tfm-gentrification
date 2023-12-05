@@ -640,6 +640,7 @@ data_sources:
     natalidad:
       format: csv
       local:
+        - data/raw/natalidad/2021_taxa_natalitat.csv
         - data/raw/natalidad/2020_taxa_natalitat.csv
         - data/raw/natalidad/2019_taxa_natalitat.csv
         - data/raw/natalidad/2018_taxa_natalitat.csv
@@ -648,6 +649,7 @@ data_sources:
         - data/raw/natalidad/2015_taxa_natalitat.csv
         - data/raw/natalidad/2014_taxa_natalitat.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/cb57b490-5668-4d25-a889-a613c6c033d8/download/2021_taxa_natalitat.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/24602560-17c9-49b7-84dd-dc191ed66c0e/download/2020_taxa_natalitat.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/b0021523-09f4-423b-836a-d25e81089d17/download/2019_taxa_natalitat.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/fb4b8264-e6c7-44b7-95dd-42b88bbff020/resource/91b6b18c-8782-47c6-82f5-ea269f3a232c/download/2018_taxa_natalitat.csv
