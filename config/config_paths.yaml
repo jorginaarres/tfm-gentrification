@@ -678,6 +678,7 @@ data_sources:
     inmigracion:
       format: csv
       local:
+        - data/raw/inmigracion/2021_taxa_immigracio.csv
         - data/raw/inmigracion/2020_taxa_immigracio.csv
         - data/raw/inmigracion/2019_taxa_immigracio.csv
         - data/raw/inmigracion/2018_taxa_immigracio.csv
@@ -686,6 +687,7 @@ data_sources:
         - data/raw/inmigracion/2015_taxa_immigracio.csv
         - data/raw/inmigracion/2014_taxa_immigracio.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/fee0ae5c-a5d9-4e9a-8535-64bfea96d8e6/download/2021_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/43539e03-0d1c-4355-b144-65b110918d8c/download/2020_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/04ceda77-ceb5-4ae7-ad64-20a4cb4f94f0/download/2019_taxa_immigracio.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/9e7d4905-914a-4ee6-9992-9bdecf1c018d/resource/bf82f3fc-5a9a-48fd-8e95-75ed1b5aa7ea/download/2018_taxa_immigracio.csv
