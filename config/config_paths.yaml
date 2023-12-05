@@ -235,6 +235,8 @@ data_sources:
     precio_alquiler:
       format: csv
       local:
+        - data/raw/precio_alquiler_mensual/2023_lloguer_preu_trim.csv
+        - data/raw/precio_alquiler_mensual/2022_lloguer_preu_trim.csv
         - data/raw/precio_alquiler_mensual/2021_lloguer_preu_trim.csv
         - data/raw/precio_alquiler_mensual/2020_lloguer_preu_trim.csv
         - data/raw/precio_alquiler_mensual/2019_lloguer_preu_trim.csv
@@ -244,6 +246,8 @@ data_sources:
         - data/raw/precio_alquiler_mensual/2015_lloguer_preu_trim.csv
         - data/raw/precio_alquiler_mensual/2014_lloguer_preu_trim.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/8148fe53-6bb4-42ca-98df-93e6b723dca9/download/2023_lloguer_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/e96bf614-467b-40ab-91b9-e48a616ea775/download/2022_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/cfc45f2b-62eb-4621-8486-1b90e36b4bfe/download/2021_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/47c9d64d-317a-45d0-8c45-45488df8601c/download/2020_lloguer_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/69c3250b-100c-4d5b-a08e-0a191d9950e3/resource/004c76b1-6269-4136-89b2-89fd47046930/download/2019_lloguer_preu_trim.csv
