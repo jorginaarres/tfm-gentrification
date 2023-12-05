@@ -720,6 +720,8 @@ data_sources:
     ocupacion_media_piso:
       format: csv
       local:
+        - data/raw/ocupacion_media_piso/2022_padro_ocupacio_mitjana.csv
+        - data/raw/ocupacion_media_piso/2021_padro_ocupacio_mitjana.csv
         - data/raw/ocupacion_media_piso/2020_padro_ocupacio_mitjana.csv
         - data/raw/ocupacion_media_piso/2019_padro_ocupacio_mitjana.csv
         - data/raw/ocupacion_media_piso/2018_padro_ocupacio_mitjana.csv
@@ -728,6 +730,8 @@ data_sources:
         - data/raw/ocupacion_media_piso/2015_padro_ocupacio_mitjana.csv
         - data/raw/ocupacion_media_piso/2014_padro_ocupacio_mitjana.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/fa933954-fd13-48a2-ab0d-e4214c996d1a/download/2022_padro_ocupacio_mitjana.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/b8b3d288-fdd0-4c95-b905-e177114cf4f6/download/2021_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/5267fd1f-5fb6-41fe-821e-3790efa0a461/download/2020_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/35619477-6bb3-4211-b4a2-3b85013f1d66/download/2019_padro_ocupacio_mitjana.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/56568d9d-651a-49ff-bbc8-52d3fcee4421/resource/fb4f3e52-8997-4cc0-80be-bebbd850354d/download/2018_padro_ocupacio_mitjana.csv
