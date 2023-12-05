@@ -24,11 +24,17 @@ data_sources:
     renta:
       format: csv
       local:
+        - data/raw/renda_disponible_llars/2021_renda_neta_mitjana_per_llar.csv
+        - data/raw/renda_disponible_llars/2020_renda_neta_mitjana_per_llar.csv
+        - data/raw/renda_disponible_llars/2019_renda_neta_mitjana_per_llar.csv
         - data/raw/renda_disponible_llars/2018_renda_neta_mitjana_per_llar.csv
         - data/raw/renda_disponible_llars/2017_renda_neta_mitjana_per_llar.csv
         - data/raw/renda_disponible_llars/2016_renda_neta_mitjana_per_llar.csv
         - data/raw/renda_disponible_llars/2015_renda_neta_mitjana_per_llar.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/44916a85-462d-4c1c-b3a5-98d9e161c299/download/2021_renda_neta_mitjana_per_llar.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/cb629032-8de5-4a52-ba0a-c5e2410d0911/download/2020_renda_neta_mitjana_per_llar.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/0d9df8cf-8b95-43c3-b07d-14e11f2ebdaf/download/2019_renda_neta_mitjana_per_llar.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/9d30d9b1-bbbe-4431-84f1-bcbf001acc14/download/2018_renda_neta_mitjana_per_llar.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/47dabf0e-371d-4739-9206-c81a56666797/download/2017_renda_neta_mitjana_per_llar.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/c9b9b5e5-b02f-4b47-892b-79acf0191802/resource/37147963-5686-4746-8b13-9a1349906351/download/2016_renda_neta_mitjana_per_llar.csv
