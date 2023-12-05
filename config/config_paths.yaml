@@ -327,6 +327,8 @@ data_sources:
         - data/raw/incidentes/2018_incidents_gestionats_gub.csv
         - data/raw/incidentes/2019_incidents_gestionats_gub.csv
         - data/raw/incidentes/2020_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2021_incidents_gestionats_gub.csv
+        - data/raw/incidentes/2022_incidents_gestionats_gub.csv
       url:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/68b544cd-db7a-42da-8018-30ca6c154a24/download/2014_incidents_gestionats_gub.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/82d44d94-2e18-42e5-a0e2-2aedf7fa636b/download/2015_incidents_gestionats_gub.csv
@@ -335,6 +337,8 @@ data_sources:
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/b72a5374-e5e5-4904-9d8b-a51551da1536/download/2018_incidents_gestionats_gub.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/00e17d4b-ff16-45aa-9089-ddb60a129bcf/download/2019_incidents_gestionats_gub.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/0da45262-e472-46ba-a44f-665b5b849693/download/2020_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/f4ab0c87-d31d-47e5-bb0e-d368f1e28524/download/2021_incidents_gestionats_gub.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/8181e647-083e-48ec-b8a3-68b25b91ab83/resource/e81d71be-6c93-4df3-ae58-948649c4c614/download/2022_incidents_gestionats_gub.csv
       select:
         - NK_Any
         - Mes_any
