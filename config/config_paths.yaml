@@ -67,6 +67,61 @@ data_sources:
         seccion_censal: int
         importe_eur_anyo: int
 
+    nivel_educativo:
+      format: csv
+      local:
+        - data/raw/nivel_educativo/2023_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2022_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2021_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2020_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2019_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2018_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2017_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2016_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2015_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+        - data/raw/nivel_educativo/2014_pad_mdb_niv-educa-esta_edat-lloc-naix.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/054a273a-eec9-47a1-9ee6-c34d785d61e1/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/27164949-57bc-462f-8d20-fab40b9b8838/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/03c8efbb-026e-4f84-8fef-42355abfc917/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/548d68ee-39c0-45cc-b3e3-c89cf5bca032/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/6851cb19-8d22-43cb-9249-3e597a967c73/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/ebd78f0e-91db-460e-962e-df768129f356/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/fee63a6b-71d0-4215-81d2-9dd25aa23040/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/2e9f9e73-8887-4835-b4ad-f438910883b2/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/12f3713c-94ba-4445-94e0-882404f1018d/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/67f811ef-a79e-4877-ae62-77148443aa69/resource/2d409514-f30e-4063-9ded-8595e0adc437/download
+      select:
+        - Data_Referencia
+        - Codi_Districte
+        - Nom_Districte
+        - Codi_Barri
+        - Nom_Barri
+        - Valor
+        - NIV_EDUCA_esta
+        - LLOC_NAIX
+      column_alias:
+        - anyo
+        - cod_dist
+        - nom_dist
+        - id_barrio
+        - nom_barrio
+        - num_personas
+        - titulacio_academica
+        - lloc_naixement
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        cod_dist: int
+        nom_dist: str
+        id_barrio: int
+        nom_barrio: str
+        num_personas: int
+        titulacio_academica: int
+        lloc_naixement: int
+
     censo_negocios_2019:
       format: csv
       local: data/raw/2019_censcomercialbcn_detall.csv
@@ -807,6 +862,8 @@ data_sources:
       renta: data/L1/renta.csv
     superficie:
       superficie: data/L1/superficie.csv
+    nivel_educativo:
+      nivel_educativo: data/L1/nivel_educativo.csv
 
   l2:
     dataset:

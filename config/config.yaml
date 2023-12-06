@@ -1,7 +1,7 @@
 data_source: local
 steps: [l1, l2, l3, geo, analysis, clustering, kpi_evo]
 min_year: 2015
-max_year: 2018
+max_year: 2021
 l1_save_path: data/L1/
 l2_save_path: data/L2/
 analysis_path: data/analysis/
@@ -22,4 +22,5 @@ skip_processing_raw:
   - ocupacion_media_piso
   - inmigracion
   - natalidad
+  - nivel_educativo
   - superficie
