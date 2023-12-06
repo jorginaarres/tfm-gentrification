@@ -128,5 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/data/raw
-/data/L1
+/data
+/dataOriginal
+.idea
+.DS_Store

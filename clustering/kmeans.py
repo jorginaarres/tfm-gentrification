@@ -52,9 +52,9 @@ def silhouette_method(data):
 
 
 def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
-    # 1 Filter rows from 2015 and 2018 to calculate differences
+    # 1 Filter rows from 2015 and 2021 to calculate differences
     dataset = df.copy()
-    df = df[df['anyo'].isin([2015, 2018])]
+    df = df[df['anyo'].isin([2015, 2021])]
 
     # set 2015 values as negative and sum to calculate differences
     kpis = ['num_incidentes', 'inmigracion_mil_hab',

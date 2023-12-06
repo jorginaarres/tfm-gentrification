@@ -18,7 +18,7 @@ estos pasos que se quieren ejecutar, los cuales pueden ser los siguientes:
 
 - **l1**: Transformaciones iniciales de ficheros crudos de origen
 - **l2**: Transformaciones intermedias de los ficheros generados en la fase anterior
-- **l3**: Generación del dataset que tiene la evolución de variables de 2015 a 2018 por barrio
+- **l3**: Generación del dataset que tiene la evolución de variables de 2015 a 2021 por barrio
 - **geo**: Añade al dataset anterior los datos geoespaciales de cada barrio
 - **analysis**: Genera el dataset que se subirá a Flourish con la distribución de ubicaciones/negocios por barrio en 2019 
 - que será representado con gráficos de radar

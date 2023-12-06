@@ -923,6 +923,8 @@ data_sources:
       superficie: data/L1/superficie.csv
     nivel_educativo:
       nivel_educativo: data/L1/nivel_educativo.csv
+    sexo_y_edad:
+      sexo_y_edad: data/L1/sexo_y_edad.csv
 
   l2:
     dataset:
@@ -936,3 +938,5 @@ data_sources:
       precio_compra_venta: data/L2/precio_compra_venta.csv
       renta: data/L2/renta.csv
       superficie: data/L2/superficie.csv
+      nivel_educativo: data/L2/nivel_educativo.csv
+      sexo_y_edad: data/L2/sexo_y_edad.csv
