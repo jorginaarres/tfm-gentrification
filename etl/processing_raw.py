@@ -62,6 +62,9 @@ def process_precio_compra_venta(df: pd.DataFrame, config: dict = None
     # filter only by "tipo_valor" == Total. Milers d'euros and group by year
     # and neighorhood to avoid dataset parts that are divided by term
     df = df[df['tipo_valor'] == "Total. Euros/m2 construït"]
+    # remove "--" as euro value and convert it to numeric
+    df.loc[df['euros'] == "--", "euros"] = ""
+    df['euros'] = pd.to_numeric(df['euros'])
     group = ['anyo', 'id_barrio']
     df = df.groupby(group).agg(precio_compra_venta_m2=('euros',
                                                        'mean')).reset_index()

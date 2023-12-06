@@ -284,6 +284,9 @@ data_sources:
     precio_compra_venta:  # hacer media de cada fichero (group by id_barrio), ya que 2020 y 2019 estan por trimestre
       format: csv
       local:
+        - data/raw/precio_compra_venta/2023_comp_vend_preu_trim.csv
+        - data/raw/precio_compra_venta/2022_comp_vend_preu_trim.csv
+        - data/raw/precio_compra_venta/2021_comp_vend_preu_trim.csv
         - data/raw/precio_compra_venta/2020_comp_vend_preu_trim.csv
         - data/raw/precio_compra_venta/2019_comp_vend_preu_trim.csv
         - data/raw/precio_compra_venta/2018_comp_vend_preu.csv
@@ -292,6 +295,9 @@ data_sources:
         - data/raw/precio_compra_venta/2015_comp_vend_preu.csv
         - data/raw/precio_compra_venta/2014_comp_vend_preu.csv
       url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/5a86c311-4363-4a20-a1e7-fbb867659a3f/download/2023_comp_vend_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/416c6da9-f546-48f4-858d-836c25fa2ed3/download/2022_comp_vend_preu_trim.csv
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/3942e879-c059-4691-b002-d7b85a91f92f/download/2021_comp_vend_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/0a919484-b023-4579-bdc9-f7b7df90d9b5/download/2020_comp_vend_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/c9defbfa-0b58-49db-85ed-cf13f165a5d5/download/2019_comp_vend_preu_trim.csv
         - https://opendata-ajuntament.barcelona.cat/data/dataset/d9f7d804-bcc6-4a3f-9c26-44cd84c4402e/resource/c03c20d7-7247-4da9-88d2-c66577638589/download/2018_comp_vend_preu.csv
