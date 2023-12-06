@@ -122,6 +122,65 @@ data_sources:
         titulacio_academica: int
         lloc_naixement: int
 
+    sexo_y_edad:
+      format: csv
+      local:
+        - data/raw/sexo_y_edad/2023_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2022_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2021_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2020_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2019_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2018_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2017_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2016_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2015_pad_mdba_sexe_edat-1.csv
+        - data/raw/sexo_y_edad/2014_pad_mdba_sexe_edat-1.csv
+      url:
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/a0c47ada-c5d4-47f8-9d1b-79bac1e60992/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/57f69c2f-7bdd-4f2b-88d7-b0c4094e5e0c/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/9dad21ac-7870-45a3-882f-afa63dfdac7f/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/96d8e8d3-afc1-4c27-8021-938a5b64d337/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/f28aa11d-9993-48f5-870c-375d462b1a46/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/999336e5-5906-4b9d-a2a1-2f5b35edb299/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/d9376647-43e1-4564-afa5-6412b657e535/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/1315cb54-42e3-4a52-b313-0589badb9f6d/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/0b6ad314-9c10-4104-b745-9f8146d8e619/download
+        - https://opendata-ajuntament.barcelona.cat/data/dataset/d978cd89-53f7-41be-b4ba-91a0b5d36f71/resource/eeb4fbe5-22ce-4c7e-9229-9cfc89d0a791/download
+      select:
+        - Data_Referencia
+        - Codi_Districte
+        - Nom_Districte
+        - Codi_Barri
+        - Nom_Barri
+        - AEB
+        - Valor
+        - SEXE
+        - EDAT_1
+      column_alias:
+        - anyo
+        - cod_dist
+        - nom_dist
+        - id_barrio
+        - nom_barrio
+        - aeb
+        - num_personas
+        - sexo
+        - lloc_naixement
+      header: 0
+      sep: ","
+      schema_mode: explicit  # explicit or infer
+      schema:
+        anyo: int
+        cod_dist: int
+        nom_dist: str
+        id_barrio: int
+        nom_barrio: str
+        aeb: int
+        num_personas: int
+        sexo: int
+        lloc_naixement: int
+
+
     censo_negocios_2019:
       format: csv
       local: data/raw/2019_censcomercialbcn_detall.csv

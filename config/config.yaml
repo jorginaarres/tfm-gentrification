@@ -23,4 +23,5 @@ skip_processing_raw:
   - inmigracion
   - natalidad
   - nivel_educativo
+  - sexo_y_edad
   - superficie
