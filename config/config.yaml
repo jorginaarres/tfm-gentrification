@@ -22,6 +22,4 @@ skip_processing_raw:
   - ocupacion_media_piso
   - inmigracion
   - natalidad
-  - nivel_educativo
-  - sexo_y_edad
   - superficie

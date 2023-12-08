@@ -4,7 +4,6 @@ from datetime import datetime
 import numpy as np
 from utils.utils import count_nulls
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -12,7 +11,7 @@ def years_array_from_created_modified_ts(created: str, modified: str,
                                          min_year: int) -> list:
     created_year = datetime.fromisoformat(created).year
     modified_year = datetime.fromisoformat(modified).year
-    years = list(range(created_year, modified_year+1))
+    years = list(range(created_year, modified_year + 1))
     years = [int(year) for year in years if year >= min_year]
     return years
 
@@ -33,6 +32,36 @@ def process_renta(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
     df = df.groupby(group).agg(importe_eur_anyo=('importe_eur_anyo', 'mean'))
     df['importe_eur_anyo'] = np.round(df['importe_eur_anyo'], 2)
     df = df.reset_index()
+    return df
+
+
+def process_sexo_y_edad(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
+    df.loc[df['data_referencia'].notnull(), 'anyo'] = df['data_referencia'].str[:4].astype(int, errors='ignore')
+    df.loc[df['num_personas'] == "..", "num_personas"] = "0"
+    df['num_personas'] = pd.to_numeric(df['num_personas'])
+
+    df.drop(columns=['data_referencia', 'sexo', 'aeb', 'cod_dist', 'nom_dist'], inplace=True)
+
+    df.groupby(["id_barrio", "anyo", "edad"], as_index=False)["num_personas"].sum()
+    df["numpersonas_x_edad"] = df["edad"] * df["num_personas"]
+    df.groupby(["anyo", "id_barrio", "edad"], as_index=False)["numpersonas_x_edad"].sum()
+
+    df['total_personas_barrio_anyo'] = df.groupby(["anyo", "id_barrio"], as_index=False)['num_personas'].transform(sum)
+    df['total_edad_barrio_anyo'] = df.groupby(["anyo", "id_barrio"], as_index=False)['numpersonas_x_edad'].transform(
+        sum)
+    df['media_edad_barrio_anyo'] = pd.to_numeric(df['total_edad_barrio_anyo'] / df['total_personas_barrio_anyo']).round(
+        2)
+
+    df.drop(
+        columns=['num_personas', 'edad', 'numpersonas_x_edad', 'total_edad_barrio_anyo', 'total_personas_barrio_anyo'],
+        inplace=True)
+    df = df[~(df.duplicated(subset=['anyo', 'id_barrio'], keep='first'))].copy()
+    return df
+
+
+def process_nivel_educativo(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
+    df.loc[df['data_referencia'].notnull(), 'anyo'] = df['data_referencia'].str[:4].astype(int, errors='ignore')
+    df.drop(columns=['data_referencia'], inplace=True)
     return df
 
 

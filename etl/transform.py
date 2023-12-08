@@ -79,6 +79,8 @@ def transform_dataset(sources: dict, min_anyo: int,
     kpis = pd.merge(kpis, dfs['precio_alquiler'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['precio_compra_venta'], on=merge_on, how='left')
     kpis = pd.merge(kpis, dfs['renta'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['nivel_educativo'], on=merge_on, how='left')
+    kpis = pd.merge(kpis, dfs['sexo_y_edad'], on=merge_on, how='left')
     kpis = kpis[kpis['id_barrio'] != 99]
 
     lugares = dfs['lugares']

@@ -101,7 +101,7 @@ data_sources:
         - NIV_EDUCA_esta
         - LLOC_NAIX
       column_alias:
-        - anyo
+        - data_referencia
         - cod_dist
         - nom_dist
         - id_barrio
@@ -113,12 +113,12 @@ data_sources:
       sep: ","
       schema_mode: explicit  # explicit or infer
       schema:
-        anyo: int
+        data_referencia: string
         cod_dist: int
         nom_dist: str
         id_barrio: int
         nom_barrio: str
-        num_personas: int
+        num_personas: str
         titulacio_academica: int
         lloc_naixement: int
 
@@ -157,7 +157,7 @@ data_sources:
         - SEXE
         - EDAT_1
       column_alias:
-        - anyo
+        - data_referencia
         - cod_dist
         - nom_dist
         - id_barrio
@@ -165,20 +165,20 @@ data_sources:
         - aeb
         - num_personas
         - sexo
-        - lloc_naixement
+        - edad
       header: 0
       sep: ","
       schema_mode: explicit  # explicit or infer
       schema:
-        anyo: int
+        data_referencia: string
         cod_dist: int
         nom_dist: str
         id_barrio: int
         nom_barrio: str
         aeb: int
-        num_personas: int
+        num_personas: str
         sexo: int
-        lloc_naixement: int
+        edad: int
 
 
     censo_negocios_2019:
