@@ -69,6 +69,8 @@ def transform_dataset(sources: dict, min_anyo: int,
     dfs['natalidad'].drop(columns=['nom_barrio'], inplace=True)
     dfs['lugares'].drop(columns=['nom_barrio'], inplace=True)
     dfs['inmigracion'].drop(columns=['nom_barrio'], inplace=True)
+    dfs['nivel_educativo'].drop(columns=['nom_barrio'], inplace=True)
+    dfs['sexo_y_edad'].drop(columns=['nom_barrio'], inplace=True)
 
     merge_on = ['anyo', 'id_barrio']
     kpis = pd.merge(dfs['superficie'], dfs['incidentes'], on=['id_barrio'],

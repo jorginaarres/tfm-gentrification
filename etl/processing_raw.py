@@ -61,7 +61,25 @@ def process_sexo_y_edad(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
 
 def process_nivel_educativo(df: pd.DataFrame, config: dict = None) -> pd.DataFrame:
     df.loc[df['data_referencia'].notnull(), 'anyo'] = df['data_referencia'].str[:4].astype(int, errors='ignore')
-    df.drop(columns=['data_referencia'], inplace=True)
+    df.loc[df['num_personas'] == "..", "num_personas"] = "0"
+    df['num_personas'] = pd.to_numeric(df['num_personas'])
+
+    df.drop(columns=['data_referencia', 'cod_dist', 'nom_dist', 'lloc_naixement'], inplace=True)
+
+    df.groupby(["id_barrio", "anyo", "titulacio_academica"], as_index=False)["num_personas"].sum()
+    df["numpersonas_x_titulacioacademica"] = df["titulacio_academica"] * df["num_personas"]
+    df.groupby(["anyo", "id_barrio", "titulacio_academica"], as_index=False)["numpersonas_x_titulacioacademica"].sum()
+
+    df['total_personas_barrio_anyo'] = df.groupby(["anyo", "id_barrio"], as_index=False)['num_personas'].transform(sum)
+    df['total_titulacioacademica_barrio_anyo'] = df.groupby(["anyo", "id_barrio"], as_index=False)['numpersonas_x_titulacioacademica'].transform(
+        sum)
+    df['media_titulacioacademica_barrio_anyo'] = pd.to_numeric(df['total_titulacioacademica_barrio_anyo'] / df['total_personas_barrio_anyo']).round(
+        2)
+
+    df.drop(
+        columns=['num_personas', 'titulacio_academica', 'numpersonas_x_titulacioacademica', 'total_personas_barrio_anyo', 'total_titulacioacademica_barrio_anyo'],
+        inplace=True)
+    df = df[~(df.duplicated(subset=['anyo', 'id_barrio'], keep='first'))].copy()
     return df
 
 
