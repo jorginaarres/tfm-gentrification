@@ -57,8 +57,8 @@ def process_lugares(dfs: dict, min_year, max_year) -> pd.DataFrame:
     return df
 
 
-def process_censo_negocios_2019(dfs: dict) -> pd.DataFrame:
-    df = dfs['censo_negocios_2019']
+def process_censo_negocios_2022(dfs: dict) -> pd.DataFrame:
+    df = dfs['censo_negocios_2022']
     categories = {
         'minoristas_alimentacion_supermercado': [
             'Carn i Porc', 'Peix i marisc', 'Ous i aus',

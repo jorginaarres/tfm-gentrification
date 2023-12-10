@@ -2,8 +2,8 @@ data_sources:
   raw:
     superficie:
       format: csv
-      local: data/raw/2019_superficie.csv
-      url: https://opendata-ajuntament.barcelona.cat/data/dataset/8f144d2c-1185-4e5c-9b97-ac930eeffca8/resource/9cd3d989-03c2-4e39-b3a7-eec0eac53e9f/download/2019_superficie.csv
+      local: data/raw/2021_superficie.csv
+      url: https://opendata-ajuntament.barcelona.cat/data/dataset/8f144d2c-1185-4e5c-9b97-ac930eeffca8/resource/bb402991-6226-4b33-a901-7d23843ec9e1/download/2021_superficie.csv
       select:
         - Codi_Barri
         - Nom_Barri
@@ -181,10 +181,10 @@ data_sources:
         edad: int
 
 
-    censo_negocios_2019:
+    censo_negocios_2022:
       format: csv
-      local: data/raw/2019_censcomercialbcn_detall.csv
-      url: https://opendata-ajuntament.barcelona.cat/data/dataset/62fb990e-4cc3-457a-aea1-497604e15659/resource/c897c912-0f3c-4463-bdf2-a67ee97786ac/download/2019_censcomercialbcn_detall.csv
+      local: data/raw/2022_censcomercialbcn_detall.csv
+      url: https://opendata-ajuntament.barcelona.cat/data/dataset/fe177673-0f83-42e7-b35a-ddea901be8bc/resource/99764d55-b1be-4281-b822-4277442cc721/download/220930_censcomercialbcn_opendata_2022_v10.csv
       select:
         - Nom_Grup_Activitat
         - Nom_Activitat
@@ -903,8 +903,8 @@ data_sources:
 #      roba_amiga: data/L1/roba_amiga.csv
 #    antiguedad_vehiculos:
 #      antiguedad_vehiculos: data/L1/antiguedad_vehiculos.csv
-    censo_negocios_2019:
-      censo_negocios_2019: data/L1/censo_negocios_2019.csv
+    censo_negocios_2022:
+      censo_negocios_2022: data/L1/censo_negocios_2022.csv
     incidentes:
       incidentes: data/L1/incidentes.csv
     inmigracion:

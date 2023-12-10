@@ -49,7 +49,7 @@ if __name__ == '__main__':
         save_gdf_to_geojson(dataset_geo, filename='dataset')
 
     if 'analysis' in config['steps']:
-        places = pd.read_csv('data/L2/censo_negocios_2019.csv', header=0)
+        places = pd.read_csv('data/L2/censo_negocios_2022.csv', header=0)
         palces_norm = transform_places_normalized(places)
         save_dfs_to_csv({'ubics_radar': palces_norm}, config['dataset'])
 
