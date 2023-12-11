@@ -59,7 +59,7 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     # set 2015 values as negative and sum to calculate differences
     kpis = ['num_incidentes', 'inmigracion_mil_hab',
             'tasa_natalidad_mil_habitantes', 'num_personas_por_domicilio',
-            'precio_alquiler_mes_m2', 'precio_compra_venta_m2', 'renta']
+            'precio_alquiler_mes_m2', 'precio_compra_venta_m2', 'renta',  'media_titulacioacademica_barrio_anyo', 'media_edad_barrio_anyo']
     for kpi in kpis:
         df[kpi] = np.where(df['anyo'] == 2015, -1 * df[kpi], df[kpi])
 
@@ -75,8 +75,10 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
                  'num_personas_por_domicilio', sum),
              precio_alquiler_mes_m2=('precio_alquiler_mes_m2', sum),
              precio_compra_venta_m2=('precio_compra_venta_m2', sum),
-             renta=('renta', sum))
-        .reset_index()
+             renta=('renta', sum),
+             media_titulacioacademica_barrio_anyo=('media_titulacioacademica_barrio_anyo', sum),
+            media_edad_barrio_anyo=('media_edad_barrio_anyo', sum))
+    .reset_index()
     )
     for kpi in kpis:
         df[kpi] = np.round(df[kpi], 2)
@@ -102,7 +104,7 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
     df2 = df2.drop(columns=[1])
 
     # try PCA
-    pca = PCA(n_components=6)
+    pca = PCA(n_components=8)
     pca.fit(df2)
     print(f'Variancia explicada PCA: {pca.explained_variance_ratio_}')
 
@@ -128,7 +130,9 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
                  'num_personas_por_domicilio', 'mean'),
              precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'mean'),
              precio_compra_venta_m2=('precio_compra_venta_m2', 'mean'),
-             renta=('renta', 'mean'))
+             renta=('renta', 'mean'),
+             media_titulacioacademica_barrio_anyo=('media_titulacioacademica_barrio_anyo', 'mean'),
+             media_edad_barrio_anyo=('media_edad_barrio_anyo', 'mean'))
         .reset_index()
     )
     dataset_k3.to_csv('data/dataset/dataset_clusters_3.csv', index=False)
@@ -154,7 +158,10 @@ def apply_kmeans(df: pd.DataFrame) -> pd.DataFrame:
                  'num_personas_por_domicilio', 'mean'),
              precio_alquiler_mes_m2=('precio_alquiler_mes_m2', 'mean'),
              precio_compra_venta_m2=('precio_compra_venta_m2', 'mean'),
-             renta=('renta', 'mean'))
+             renta=('renta', 'mean'),
+             media_titulacioacademica_barrio_anyo=('media_titulacioacademica_barrio_anyo', 'mean'),
+             media_edad_barrio_anyo=('media_edad_barrio_anyo', 'mean')
+             )
         .reset_index()
     )
     dataset_k4.to_csv('data/dataset/dataset_clusters_4.csv', index=False)
