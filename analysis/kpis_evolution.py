@@ -17,9 +17,7 @@ def kpi_evolution(df: pd.DataFrame):
         df_diff = pd.merge(df_2015_var, df_2021_var, on='nom_barrio',
                            how='inner')
 
-        df_diff['diff'] = np.where(df_diff[var_2015] <= df_diff[var_2021],
-                                   df_diff[var_2021] - df_diff[var_2015],
-                                   df_diff[var_2021] - df_diff[var_2021])
+        df_diff['diff'] = df_diff[var_2021] - df_diff[var_2015]
 
         df_diff['diff_perc'] = np.round(100*(df_diff['diff'] / df_diff[
             var_2015]), 2)
@@ -27,7 +25,7 @@ def kpi_evolution(df: pd.DataFrame):
         df_diff['evolution'] = np.where(
             df_diff[var_2015] <= df_diff[var_2021],
             '+' + df_diff['diff_perc'].astype(str) + '%',
-            '-' + df_diff['diff_perc'].astype(str) + '%'
+            df_diff['diff_perc'].astype(str) + '%'
         )
         df_diff = df_diff.sort_values(by='diff_perc', ascending=False)
 
